@@ -12,15 +12,14 @@ const icons = {
   IconBrandChrome
 };
 const i = () => {
-  return <i className='iconfont icon-shouye'></i>
+  return <i className='iconfont icon-IO-overview-activity'></i>
 }
-
-const Search = {
-  id: 'home',
-  title: <FormattedMessage id="home"></FormattedMessage>,
+const Overview = {
+  id: 'Overview',
+  title: <FormattedMessage id="Overview" />,
   icon: i,
   type: 'group',
-  url: '/home'
+  url: '/Overview'
 };
 
-export default Search;
+export default Overview;

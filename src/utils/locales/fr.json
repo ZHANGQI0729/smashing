@@ -12,5 +12,14 @@
   "roadmap": "feuille de route",
   "social-profile": "profil social",
   "account-settings": "paramètres du compte",
-  "logout": "Se déconnecter"
+  "logout": "Se déconnecter",
+  "home": "Page d'accueil",
+  "Scheduling": "Organisation de l'itinéraire",
+  "Ideas": "Pensées",
+  "Search": "Rechercher",
+  "Collections": "Collections",
+  "Overview": "Aperçu",
+  "Reports": "Rapport",
+  "Iris": "Iris（assistante）",
+  "HomeTitle":"Bienvenue sur Smashing"
 }

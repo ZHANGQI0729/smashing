@@ -2,7 +2,7 @@
 
 // third-party
 import { FormattedMessage } from 'react-intl';
-
+import '../scss/irid.scss';
 // assets
 import { IconBrandChrome } from '@tabler/icons-react';
 
@@ -12,15 +12,16 @@ const icons = {
   IconBrandChrome
 };
 const i = () => {
-  return <i className='iconfont icon-shouye'></i>
+  return <div style={{
+    width: '20px', height: "20px", borderRadius: "50%"
+  }} className='icon'></div >
 }
-
-const Search = {
-  id: 'home',
-  title: <FormattedMessage id="home"></FormattedMessage>,
+const Iris = {
+  id: 'Iris',
+  title: <FormattedMessage id="Iris" />,
   icon: i,
   type: 'group',
-  url: '/home'
+  url: '/Iris'
 };
 
-export default Search;
+export default Iris;

@@ -44,7 +44,7 @@ const Sidebar = () => {
     const isVerticalOpen = menuOrientation === MenuOrientation.VERTICAL && drawerOpen;
     const drawerContent = (
       <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
-        <Chip label={process.env.REACT_APP_VERSION} disabled chipcolor="secondary" size="small" sx={{ cursor: 'pointer' }} />
+        {/* <Chip label={process.env.REACT_APP_VERSION} disabled chipcolor="secondary" size="small" sx={{ cursor: 'pointer' }} /> */}
       </Stack>
     );
 

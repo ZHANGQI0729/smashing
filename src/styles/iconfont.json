@@ -1,0 +1,65 @@
+{
+  "id": "4606521",
+  "name": "smashing",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1126",
+      "name": "文件夹",
+      "font_class": "wenjianjia",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "446731",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "2699640",
+      "name": "时间安排",
+      "font_class": "shijiananpai",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "3862336",
+      "name": "reports",
+      "font_class": "reports",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "12807607",
+      "name": "IO-overview-activity",
+      "font_class": "IO-overview-activity",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "17790103",
+      "name": "形状 34",
+      "font_class": "xingzhuang34",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "21022167",
+      "name": "sparkles-outline",
+      "font_class": "sparkles-outline",
+      "unicode": "e6e6",
+      "unicode_decimal": 59110
+    },
+    {
+      "icon_id": "23529138",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e854",
+      "unicode_decimal": 59476
+    }
+  ]
+}

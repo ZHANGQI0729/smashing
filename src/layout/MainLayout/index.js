@@ -22,6 +22,7 @@ import useConfig from 'hooks/useConfig';
 
 import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 import { MenuOrientation } from 'config';
+import { BorderBottom, BorderTop } from '../../../node_modules/@mui/icons-material/index';
 
 // ==============================|| MAIN LAYOUT ||============================== //
 
@@ -63,14 +64,14 @@ const MainLayout = ({ children }) => {
       {menu}
 
       {/* main content */}
-      <MainContentStyled {...{ borderRadius, menuOrientation, open: drawerOpen, theme }}>
+      <MainContentStyled style={{ borderTop: '1px solid #eee', background: '#fff', borderLeft: "1px solid #eee" }} {...{ borderRadius, menuOrientation, open: drawerOpen, theme }}>
         <Container maxWidth={container ? 'lg' : false} {...(!container && { sx: { px: { xs: 0 } } })}>
           {/* breadcrumb */}
-          <Breadcrumbs />
+          {/* <Breadcrumbs /> */}
           {children}
         </Container>
       </MainContentStyled>
-    </Box>
+    </Box >
   );
 };
 

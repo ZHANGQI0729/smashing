@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import './globals.css';
+import '../styles/iconfont.css';
 
 // PROJECT IMPORTS
 import ProviderWrapper from 'store/ProviderWrapper';

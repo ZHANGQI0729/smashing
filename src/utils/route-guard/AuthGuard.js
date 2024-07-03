@@ -19,12 +19,12 @@ const AuthGuard = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       router.push('/login');
     }
   }, [isLoggedIn, router]);
 
-  if (!isLoggedIn) return <Loader />;
+  if (isLoggedIn) return <Loader />;
 
   return children;
 };
