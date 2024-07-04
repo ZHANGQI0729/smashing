@@ -11,11 +11,16 @@ import { IconBrandChrome } from '@tabler/icons-react';
 const icons = {
   IconBrandChrome
 };
-const i = () => {
-  return <div style={{
-    width: '20px', height: "20px", borderRadius: "50%"
-  }} className='icon'></div >
-}
+const i = () => (
+  <div
+    style={{
+      width: '20px',
+      height: '20px',
+      borderRadius: '50%'
+    }}
+    className="icon"
+  />
+);
 const Iris = {
   id: 'Iris',
   title: <FormattedMessage id="Iris" />,

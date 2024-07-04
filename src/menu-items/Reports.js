@@ -11,9 +11,7 @@ import { IconBrandChrome } from '@tabler/icons-react';
 const icons = {
   IconBrandChrome
 };
-const i = () => {
-  return <i className='iconfont icon-reports'></i>
-}
+const i = () => <i className="iconfont icon-reports" />;
 const Reports = {
   id: 'Reports',
   title: <FormattedMessage id="Reports" />,

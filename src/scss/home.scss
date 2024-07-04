@@ -1,13 +1,80 @@
-:where(.css-dev-only-do-not-override-f7vrd6).ant-card .ant-card-body {
-    padding: 5px !important;
-    background-color: #fafafa;
-    border: 1px solid #e3e4e3;
-    border-radius: 10px !important;
-}
+.home {
+    .top {
+        padding-bottom: 30px;
+        border-bottom: 1px solid #eee;
 
-.top_box {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+        .top_box {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .top_box_left {
+                width: 300px;
+
+                .top_box_left_title {
+                    font-size: 16px;
+                    font-weight: 550;
+                }
+
+                .top_box_left_text {
+                    font-size: 14px;
+                    color: #808080;
+                }
+            }
+
+            .top_box_right {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        :where(.css-dev-only-do-not-override-f7vrd6).ant-card .ant-card-body {
+            padding: 5px !important;
+            background-color: #fafafa;
+            width: 100%;
+            border: 1px solid #e3e4e3;
+            border-radius: 10px !important;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    .bottom {
+        padding: 20px 0;
+
+        .bottom_title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .bottom_text {
+            font-size: 15px;
+            color: grey;
+            line-height: 30px;
+        }
+
+        .bottom_box {
+            overflow-y: auto;
+            overflow-x: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .bottom_box_left {
+                flex-grow: 1;
+
+                .bottom_box_left_bottom {
+                    margin-top: 20px;
+                }
+            }
+
+            .bottom_box_right {
+                margin-left: 20px;
+            }
+        }
+    }
+
+
 }
