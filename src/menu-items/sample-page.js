@@ -11,13 +11,11 @@ import { IconBrandChrome } from '@tabler/icons-react';
 const icons = {
   IconBrandChrome
 };
-const i = () => {
-  return <i className='iconfont icon-shouye'></i>
-}
+const i = () => <i className="iconfont icon-shouye" />;
 
 const Search = {
   id: 'home',
-  title: <FormattedMessage id="home"></FormattedMessage>,
+  title: <FormattedMessage id="home" />,
   icon: i,
   type: 'group',
   url: '/home'

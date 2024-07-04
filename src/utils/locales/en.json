@@ -21,5 +21,18 @@
   "Overview": "Overview",
   "Reports": "Reports",
   "Iris": "Iris（Assistant）",
-  "HomeTitle": "Welcome to Smashing"
+  "HomeTitle": "Welcome to Smashing",
+  "HomeTitleldeas": "Brainstorm Ideas",
+  "Hometextldeas": "Get post ideas",
+  "HomeTitleScheduling": "Schedule Content",
+  "HometextScheduling": "Plan your posts",
+  "HomeTitleSearch": "Search Hashtags",
+  "HometextSearch": "Increase your reach",
+  "HomeTitleOverview": "View Analytics",
+  "HometextOverview": "See what’s working",
+  "Homebottomtitle": "Getting Started Suggestions",
+  "Homebottomtext": "Familiarize yourself with our tools to find out what works for you",
+  "Homebottomboxtitle": "✍️ Content Creation",
+  "Homebottomboxtitles":"🌱Hashtag Tools",
+  "Homebottomrighttitles":"📚 Useful Resources"
 }

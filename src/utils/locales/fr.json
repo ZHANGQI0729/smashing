@@ -21,5 +21,18 @@
   "Overview": "Aperçu",
   "Reports": "Rapport",
   "Iris": "Iris（assistante）",
-  "HomeTitle":"Bienvenue sur Smashing"
+  "HomeTitle": "Bienvenue sur Smashing",
+  "HomeTitleldeas": "Brainstorming",
+  "Hometextldeas": "Obtenir des idées de post",
+  "HomeTitleScheduling": "ontenu du calendrier",
+  "HometextScheduling": "Planifiez votre post",
+  "HomeTitleSearch": "Recherche Hash Tags",
+  "HometextSearch": "Augmentez votre influence",
+  "HomeTitleOverview": "Voir l'analyse",
+  "HometextOverview": "Voir comment l'effet",
+  "Homebottomtitle": "Conseils pour commencer",
+  "Homebottomtext": "Familiarisez - vous avec nos outils et découvrez ce qui vous convient",
+  "Homebottomboxtitle": "✍️ Création de contenu",
+  "Homebottomboxtitles": "🌱  Outil de marquage de hachage",
+  "Homebottomrighttitles":""
 }
