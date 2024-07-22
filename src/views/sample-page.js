@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable lines-around-directive */
 'use client';
 import { FormattedMessage } from 'react-intl';
+import ReactPlayer from 'react-player';
 import { Card, Col, Row } from 'antd';
 import { useRouter } from 'next/navigation';
 import '../scss/home.scss';
@@ -80,14 +82,63 @@ const SamplePage = () => {
         <div className="bottom_box">
           <div className="bottom_box_left">
             <div className="bottom_box_left_top">
-              <Card title={<FormattedMessage id="Homebottomboxtitle" />}>Card content</Card>
+              <Card title={<FormattedMessage id="Homebottomboxtitle" />}>
+                <div className="text">Card content</div>
+                <div className="text">Card content</div>
+                <div className="text" style={{ border: 'none' }}>
+                  Card content
+                </div>
+              </Card>
             </div>
             <div className="bottom_box_left_bottom">
-              <Card title={<FormattedMessage id="Homebottomboxtitles" />}>Card content</Card>
+              <Card title={<FormattedMessage id="Homebottomboxtitles" />}>
+                <div className="text">Card content</div>
+                <div className="text">Card content</div>
+                <div className="text" style={{ border: 'none' }}>
+                  Card content
+                </div>
+              </Card>
             </div>
           </div>
           <div className="bottom_box_right">
-            <Card title={<FormattedMessage id="Homebottomrighttitles" />}>Card content1111111111111111111</Card>
+            <Card title={<FormattedMessage id="Homebottomrighttitles" />}>
+              <div className="bottom_box_right_top">
+                <ReactPlayer className="player" controls url="https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4" />
+                <div className="player_bottom">
+                  <div className="player_bottom_left">🎥</div>
+                  <div className="player_bottom_right">
+                    <div className="player_bottom_right_title">
+                      <FormattedMessage id="HomebottomPlayertitles" />
+                    </div>
+                    <div className="player_bottom_right_text">
+                      <FormattedMessage id="HomebottomPlayertext" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="player_bottoms">
+                <div className="player_bottom_left">📱</div>
+                <div className="player_bottom_right">
+                  <div className="player_bottom_right_title">
+                    <FormattedMessage id="Homebottomsjtitles" />
+                  </div>
+                  <div className="player_bottom_right_text">
+                    <FormattedMessage id="Homebottomsjtext" />
+                  </div>
+                </div>
+              </div>
+              <div className="player_bottoms" style={{ margin: 'none' }}>
+                <div className="player_bottom_left">✌️</div>
+                <div className="player_bottom_right">
+                  <div className="player_bottom_right_title">
+                    <FormattedMessage id="Homebottomgztitles" />
+                  </div>
+                  <div className="player_bottom_right_text">
+                    <FormattedMessage id="Homebottomgztext" />
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </div>

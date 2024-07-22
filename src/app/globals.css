@@ -10,7 +10,9 @@
 .fullscreen .react-images__blanket {
   z-index: 1200;
 }
-
+body{
+  min-width: 100%;
+}
 /* ==============================|| PERFECT SCROLLBAR ||============================== */
 
 .scrollbar-container.ps,
