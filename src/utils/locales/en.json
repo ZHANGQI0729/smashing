@@ -34,5 +34,10 @@
   "Homebottomtext": "Familiarize yourself with our tools to find out what works for you",
   "Homebottomboxtitle": "✍️ Content Creation",
   "Homebottomboxtitles":"🌱Hashtag Tools",
-  "Homebottomrighttitles":"📚 Useful Resources"
+  "Homebottomrighttitles":"📚 Useful Resources",
+  "settingTab1":"Workspace",
+  "settingTab2":"Account",
+  "settingTab3":"Team & Users",
+  "settingTab4":"Billing",
+  "settingTab5":"Invoices"
 }
