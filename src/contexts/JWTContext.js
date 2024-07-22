@@ -14,6 +14,7 @@ import accountReducer from 'store/accountReducer';
 // project imports
 import Loader from 'components/ui-component/Loader';
 import axios from 'utils/axios';
+import axiostoken from 'utils/tokenaxios';
 
 const chance = new Chance();
 
@@ -82,8 +83,10 @@ export const JWTProvider = ({ children }) => {
     init();
   }, []);
 
-  const login = async (email, password) => {
-    const response = await axios.post('/api/account/login', { email, password });
+  // eslint-disable-next-line camelcase
+  const login = async (client_id, grant_type, scope, username, password) => {
+    // eslint-disable-next-line camelcase
+    const response = await axiostoken.post('connect/token', { client_id, grant_type, scope, username, password });
     const { serviceToken, user } = response.data;
     setSession(serviceToken);
     dispatch({
@@ -128,9 +131,9 @@ export const JWTProvider = ({ children }) => {
     dispatch({ type: LOGOUT });
   };
 
-  const resetPassword = async () => {};
+  const resetPassword = async () => { };
 
-  const updateProfile = () => {};
+  const updateProfile = () => { };
 
   if (state.isInitialized !== undefined && !state.isInitialized) {
     return <Loader />;

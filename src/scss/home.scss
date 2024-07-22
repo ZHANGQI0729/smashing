@@ -72,9 +72,86 @@
 
             .bottom_box_right {
                 margin-left: 20px;
+
+                .bottom_box_right_top {
+                    max-width: 298px;
+                    border: 1px solid #e3e4e3;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+
+                    .player {
+                        width: 100% !important;
+                        height: 100% !important;
+                        border-radius: 10px 10px 0 0 !important;
+
+                        video {
+                            border-radius: 10px 10px 0 0 !important;
+                        }
+                    }
+
+                    .player_bottom {
+                        padding: 10px;
+                        display: flex;
+                        align-items: center;
+                        background-color: #fafafa;
+                        border-radius: 0 0 10px 10px;
+
+                        .player_bottom_left {
+                            font-size: 18px;
+                            margin-right: 10px;
+                        }
+
+                        .player_bottom_right {
+                            font-size: 15px;
+                            font-weight: 700;
+
+                            .player_bottom_right_title {}
+
+                            .player_bottom_right_text {
+                                font-size: 10px;
+                                font-weight: 500;
+                                color: #808080;
+                            }
+                        }
+                    }
+                }
+
+                .player_bottoms {
+                    max-width: 298px;
+                    margin-bottom: 10px;
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                    background-color: #fafafa;
+                    border-radius: 10px !important;
+                    border: 1px solid #eee;
+
+                    .player_bottom_left {
+                        font-size: 18px;
+                        margin-right: 10px;
+                    }
+
+                    .player_bottom_right {
+                        font-size: 15px;
+                        font-weight: 700;
+
+                        .player_bottom_right_title {}
+
+                        .player_bottom_right_text {
+                            font-size: 10px;
+                            font-weight: 500;
+                            color: #808080;
+                        }
+                    }
+                }
             }
         }
     }
 
+    .text {
+        font-size: 15px;
+        line-height: 43px;
+        border-bottom: 1px solid #eee;
+    }
 
 }
