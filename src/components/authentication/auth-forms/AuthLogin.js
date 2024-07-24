@@ -53,19 +53,16 @@ const JWTLogin = ({ ...others }) => {
   return (
     <Formik
       initialValues={{
-        client_id: 'Smashing_App',
-        grant_type: 'password',
-        scope: 'Smashing',
         username: 'admin',
         password: '1q2w3E'
       }}
       validationSchema={Yup.object().shape({
-        username: Yup.string().username('Must be a valid username').max(255).required('Username is required'),
+        username: Yup.string().max(255).required('Username is required'),
         password: Yup.string().max(255).required('Password is required')
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
-          await login(values.username, values.password);
+          await login('Smashing_App', 'password', values.username, values.password);
           if (scriptedRef.current) {
             setStatus({ success: true });
             router.push(DASHBOARD_PATH);

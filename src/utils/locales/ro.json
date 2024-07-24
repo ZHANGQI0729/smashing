@@ -87,5 +87,15 @@
   "Name": "nume",
   "keyEventscontent": "Zile sau evenimente speciale pe care Iris vi le va aduce la cunoștință atunci când planificați conținut.",
   "addkeyevent": "Adăugați un eveniment cheie",
-  "Global Key Events": "Evenimente cheie globale"
+  "Global Key Events": "Evenimente cheie globale",
+  "Create Key Event":"Creați un eveniment cheie",
+  "Time":"Oră",
+  "Repeating":"Repetarea",
+  "United States":"Statele Unite",
+  "United Kingdom":"Marea Britanie",
+  "Rest of the World":"Restul lumii",
+  "Seasonal Holidays":"Vacanțe sezoniere",
+  "Awareness Days":"Zile de conștientizare",
+  "Public Holidays":"Sărbătorile",
+  "My Key Events":"Evenimentele mele cheie"
 }

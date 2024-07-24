@@ -21,6 +21,7 @@ module.exports = {
   env: {
     REACT_APP_VERSION: process.env.REACT_APP_VERSION,
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
+    REACT_APP_TOKEN_URL: process.env.REACT_APP_TOKEN_URL,
 
     REACT_APP_MAPBOX_ACCESS_TOKEN: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
 

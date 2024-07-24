@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -36,12 +37,19 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+// eslint-disable-next-line import/no-unresolved
+// import { LocalizationProvider, MobileDateTimePicker } from '@mui/x-date-pickers';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import Tab from '@mui/material/Tab';
+import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import DeleteIcon from '@mui/icons-material/Delete';
 import '../scss/Scheduling.scss';
-// ==============================|| SAMPLE PAGE ||============================== //
+// ==============================|| SAMPLE PAGE ||=======;======================= //
 
 const SchedulingPage = () => {
   const router = useRouter();
@@ -232,23 +240,54 @@ const SchedulingPage = () => {
   const onFinishedit = (values) => {
     console.log('Success:', values);
   };
+  const [KeyTitle, setKeyTitle] = useState('US');
   const items = [
     {
-      label: <a href="https://www.antgroup.com">1st menu item</a>,
+      label: <FormattedMessage id="United States" />,
       key: '0'
     },
     {
-      label: <a href="https://www.aliyun.com">2nd menu item</a>,
+      label: <FormattedMessage id="United Kingdom" />,
       key: '1'
     },
     {
-      type: 'divider'
-    },
-    {
-      label: '3rd menu item',
-      key: '3'
+      label: <FormattedMessage id="Rest of the World" />,
+      key: '2'
     }
   ];
+
+  // 创建关键事件
+  const [createthemekey, setcreatethemekey] = useState(false);
+  const createthemeClosekey = () => {
+    setcreatethemekey(false);
+  };
+  const CreateThemeopenkey = () => {
+    setcreatethemekey(true);
+  };
+  // 创建关键事件的时间
+  // eslint-disable-next-line no-undef
+  const [stateRepeating, setStateRepeating] = useState(false);
+
+  const handleChangeRepeating = (event) => {
+    setStateRepeating(!stateRepeating);
+  };
+  const [statekey, setStatekey] = useState({
+    checkedA: true,
+    checkedB: true,
+    checkedC: true
+  });
+
+  const handleChangekey = (event) => {
+    setStatekey({ ...statekey, [event.target.name]: event.target.checked });
+  };
+  // 删除我的关键时间
+  const [createthemekeydel, setcreatethemekeydel] = useState(false);
+  const createthemeClosekeydel = () => {
+    setcreatethemekeydel(false);
+  };
+  const CreateThemeopenkeydel = () => {
+    setcreatethemekeydel(true);
+  };
   return (
     <div className="Scheduling">
       <BootstrapDialog onClose={brandhubhandleOk} aria-labelledby="customized-dialog-title" open={isbrandhub}>
@@ -681,9 +720,77 @@ const SchedulingPage = () => {
                       style={{
                         color: '#0044bd'
                       }}
+                      onClick={CreateThemeopenkey}
                     >
                       + <FormattedMessage id="addkeyevent" />
                     </Button>
+                    <Dialog
+                      open={createthemekey}
+                      onClose={createthemeCloseedit}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">
+                        <FormattedMessage id="Create Key Event" />
+                      </DialogTitle>
+                      <DialogContent>
+                        <Form name="edit" onFinish={onFinishedit}>
+                          <Form.Item
+                            label={<FormattedMessage id="Name" />}
+                            name="Name"
+                            rules={[
+                              {
+                                required: true
+                              }
+                            ]}
+                          >
+                            <Input />
+                          </Form.Item>
+                          <Form.Item
+                            name="Time"
+                            rules={[
+                              {
+                                required: true
+                              }
+                            ]}
+                          >
+                            <TextField
+                              id="date"
+                              label={<FormattedMessage id="Time" />}
+                              type="date"
+                              InputLabelProps={{
+                                shrink: true
+                              }}
+                              style={{ marginLeft: '50px' }}
+                            />
+                            <FormControlLabel
+                              style={{ marginLeft: '10px' }}
+                              control={<Switch checked={stateRepeating} onChange={handleChangeRepeating} name="checkedB" color="primary" />}
+                              label={<FormattedMessage id="Repeating" />}
+                            />
+                          </Form.Item>
+                          <Form.Item
+                            label={<FormattedMessage id="Description" />}
+                            name="Description"
+                            rules={[
+                              {
+                                required: true
+                              }
+                            ]}
+                          >
+                            <Input.TextArea />
+                          </Form.Item>
+                        </Form>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={createthemeClosekey}>
+                          <FormattedMessage id="Back to Safety" />
+                        </Button>
+                        <Button onClick={createthemeClosekey} type="primary">
+                          <FormattedMessage id="Create Key Event" />
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
                   </div>
                 </div>
                 <div className="globalkeyevents">
@@ -696,15 +803,85 @@ const SchedulingPage = () => {
                         items
                       }}
                       trigger={['click']}
-                      placement="bottomLeft"
                     >
                       <a onClick={(e) => e.preventDefault()}>
                         <Space>
-                          US
-                          <DownOutlined />
+                          <div>
+                            US
+                            <DownOutlined />
+                          </div>
                         </Space>
                       </a>
                     </Dropdown>
+                    {/* <Dropdown
+                      menu={{
+                        KeyEventsitems
+                      }}
+                      trigger={['click']}
+                      placement="bottomLeft"
+                    >
+                      <div>
+                        <a onClick={(e) => e.preventDefault()}>
+                          <Space>
+                            US
+                            <DownOutlined />
+                          </Space>
+                        </a>
+                      </div>
+                    </Dropdown> */}
+                  </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <FormControlLabel
+                    control={<Switch checked={statekey.checkedA} onChange={handleChangekey} name="checkedA" color="primary" />}
+                    label={<FormattedMessage id="Seasonal Holidays" />}
+                  />
+                  <FormControlLabel
+                    control={<Switch checked={statekey.checkedB} onChange={handleChangekey} name="checkedB" color="primary" />}
+                    label={<FormattedMessage id="Awareness Days" />}
+                  />
+                  <FormControlLabel
+                    control={<Switch checked={statekey.checkedC} onChange={handleChangekey} name="checkedC" color="primary" />}
+                    label={<FormattedMessage id="Public Holidays" />}
+                  />
+                </div>
+                <div className="globalkeyevents">
+                  <div className="globalkeyevents_title">
+                    <FormattedMessage id="My Key Events" />
+                  </div>
+                </div>
+                <div className="globalkeyevents_box">
+                  <div className="globalkeyevents_box_title">标题</div>
+                  <div className="globalkeyevents_box_right">
+                    <div className="globalkeyevents_box_right_time">时间</div>
+                    <div className="globalkeyevents_box_right_del" onClick={CreateThemeopenkeydel}>
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                      <Dialog
+                        open={createthemekeydel}
+                        onClose={createthemeClosedel}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                      >
+                        <DialogTitle id="alert-dialog-title">
+                          <FormattedMessage id="delcontthe" />
+                        </DialogTitle>
+                        <DialogContent>
+                          <DialogContentText id="alert-dialog-description">
+                            <FormattedMessage id="delcontthecont" />
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={createthemeClosekeydel}>
+                            <FormattedMessage id="Back to Safety" />
+                          </Button>
+                          <Button onClick={createthemeClosekeydel} type="primary">
+                            <FormattedMessage id="delcontthe" />
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -87,5 +87,15 @@
   "Name":"名字",
   "keyEventscontent":"在策划内容时，虹膜会为您带来特别的日子或活动。",
   "addkeyevent":"添加按钮事件",
-  "Global Key Events":"全局关键事件"
+  "Global Key Events":"全局关键事件",
+  "Create Key Event":"创建关键事件",
+  "Time":"时间",
+  "Repeating":"重复",
+  "United States":"美国",
+  "United Kingdom":"英国",
+  "Rest of the World":"其他国家",
+  "Seasonal Holidays":"季节性的节日",
+  "Awareness Days":"认识几天",
+  "Public Holidays":"假期",
+  "My Key Events":"我的关键事件"
 }

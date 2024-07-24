@@ -87,5 +87,15 @@
   "Name": "Nom et prénom",
   "keyEventscontent": "Les jours ou événements spéciaux Iris portera à votre attention lors de la planification du contenu.",
   "addkeyevent": "Ajouter un événement clé",
-  "Global Key Events":"Événements clés mondiaux"
+  "Global Key Events":"Événements clés mondiaux",
+  "Create Key Event":"Créer un événement clé",
+  "Time":"Le temps",
+  "Repeating":"répétition",
+  "United States":"États-Unis d’amérique",
+  "United Kingdom":"Royaume-Uni Royaume-Uni",
+  "Rest of the World":"Reste du monde",
+  "Seasonal Holidays":"Vacances saisonnières",
+  "Awareness Days":"Journées de sensibilisation",
+  "Public Holidays":"Jours fériés",
+  "My Key Events":"Mes Événements clés"
 }

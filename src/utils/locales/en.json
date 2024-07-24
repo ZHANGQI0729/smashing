@@ -87,5 +87,15 @@
   "Name": "Name",
   "keyEventscontent": "Special days or events Iris will bring to your attention when planning content.",
   "addkeyevent": "Add Key Event",
-  "Global Key Events": "Global Key Events"
+  "Global Key Events": "Global Key Events",
+  "Create Key Event": "Create Key Event",
+  "Time": "Time",
+  "Repeating": "Repeating",
+  "United States": "United States",
+  "United Kingdom": "United Kingdom",
+  "Rest of the World": "Rest of the World",
+  "Seasonal Holidays":"Seasonal Holidays",
+  "Awareness Days":"Awareness Days",
+  "Public Holidays":"Public Holidays",
+  "My Key Events":"My Key Events"
 }

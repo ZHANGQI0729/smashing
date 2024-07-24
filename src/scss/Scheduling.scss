@@ -45,31 +45,60 @@
 
     .box_left {}
 }
-.keyEvents_left{
+
+.keyEvents_left {
     display: flex;
     align-items: center;
     font-size: 16px;
 }
-.keyEvents_right{
 
+.mui-12kbpvc-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
+    background-color: #673ab7 !important;
 }
-.ant-dropdown{
+
+.mui-12kbpvc-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
+    color: #673ab7 !important;
+}
+
+.globalkeyevents_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #e8e8e8;
+    background-color: #fafafa;
+    border-radius: 8px;
+    padding: 5px 10px;
+
+    .globalkeyevents_box_right {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.keyEvents_right {}
+
+.ant-dropdown {
     z-index: 99999 !important;
 }
-.globalkeyevents{
+
+.globalkeyevents {
     display: flex;
     align-items: center;
     justify-content: space-between;
     line-height: 40px;
-    .globalkeyevents_title{
+
+    .globalkeyevents_title {
         font-size: 16px;
         font-weight: 700;
     }
 }
+
 .keyevents {
     background-image: linear-gradient(109.7deg, rgba(174, 124, 238, .32) 16%, rgba(106, 162, 246, .32) 93%);
 }
-.keyEvents_content{
+
+.keyEvents_content {
     margin-left: 10px;
     max-width: 296px;
     background-image: linear-gradient(0deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0)), radial-gradient(ellipse at 56% 59%, rgba(50, 57, 154, .62) 0, rgba(50, 57, 154, 0) 50%), radial-gradient(ellipse at 29% 34%, #2d288a 0, rgba(45, 40, 138, 0) 50%), radial-gradient(ellipse at 88% 10%, rgba(44, 117, 186, .97) 0, rgba(44, 117, 186, 0) 50%), radial-gradient(ellipse at 66% 31%, rgba(48, 95, 171, .75) 0, rgba(48, 95, 171, 0) 50%), radial-gradient(ellipse at 41% 81%, #5c32bd 0, rgba(92, 50, 189, 0) 50%), radial-gradient(ellipse at 98% 99%, rgba(142, 77, 255, .84) 0, rgba(142, 77, 255, 0) 50%), radial-gradient(ellipse at 36% 95%, rgba(70, 38, 166, .8) 0, rgba(70, 38, 166, 0) 50%), radial-gradient(ellipse at 46% 67%, rgba(94, 94, 237, .73) 0, rgba(94, 94, 237, 0) 50%), radial-gradient(ellipse at 60% 45%, rgba(47, 46, 133, .91) 0, rgba(47, 46, 133, 0) 50%);
@@ -77,6 +106,7 @@
     color: transparent;
     background-clip: text;
 }
+
 .contentThemes {
     font-size: 15px;
     border-bottom: 1px solid #e8e8e8;
