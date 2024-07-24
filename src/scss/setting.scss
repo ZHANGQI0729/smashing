@@ -1,0 +1,422 @@
+.box{
+    width: 100%;
+    // min-height: 100vh;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+
+    // 工作空间
+    .setContent{
+        max-width: 1000px;
+        min-height: 80vh;
+        max-height: 80vh;
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        border-top: none;
+        padding: 24px;
+
+        .workspace_title{
+            width: 900px;
+            height: 100px;
+            background-image: url(../styles/image/setHeadBack.png);
+            background-size: 100% 100%;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+
+            .titleImg{
+                width: 50px;
+                height: 50px;
+                background-color: red;
+                border-radius: 10px;
+                margin-left: 30px;
+            }
+            .userName{
+                font-size: 24px;
+                color: #fff;
+                margin-left: 20px;
+            }
+            .edit_icon{
+                font-size: 24px;
+                color: #fff;
+                margin-left: 20px;
+            }
+        }
+        .team{
+            margin: 20px 0;
+
+            .team_title{
+                font-size: 18px;
+                color: #000;
+            }
+            .team_content{
+                font-size: 16px;
+                color: #7d8187;
+            }
+        }
+        .invite{
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            .invite_title{
+                height: 40px;
+                display: flex;
+                align-items: center;
+                .photo{
+                    width: 40px;
+                    height: 40px;
+                    border: 1px solid #ccc;
+                    border-radius: 50%;
+                    font-size: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .name{
+                    margin-left: 20px;
+                }
+            }
+            .invite_add{
+                height: 40px;
+                color: #000;
+                font-size: 16px;
+            }
+        }
+        .society{
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-gap: 10px;
+            margin-bottom: 20px;
+            .society_li{
+                box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+                border: 1px solid #d9d9d9;
+                border-radius: 10px;
+                padding: 10px;
+                .society_top{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .society_info{
+                        font-size: 14px;
+                        color: #7d8187;
+                        .title{
+                            font-weight: 700;
+                            color: #000;
+                        }
+                    }
+                }
+                .btn{
+                    margin: 10px 0;
+                    display: flex;
+                    justify-content: space-between;
+                    .btn_link{
+                        width: 88%;
+                    }
+                }
+                .bottom_info{
+                    .li{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+            .society_create{
+                background-color: #fafafa;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+                .btn_create{
+                    font-size: 16px;
+                    color: #000;
+                }
+            }
+            .society_create1{
+                width: 100%;
+                height: 210px;
+            }
+            .society_create2{
+                width: 100%;
+                height: 100px;
+                grid-column-start: 1;
+                grid-column-end: 3;
+            }
+        }
+        .play{
+            .plan{
+                font-size: 18px;
+                color: #000;
+                font-weight: 700;
+            }
+            .content{
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .title_logo{
+                    display: flex;
+                    align-items: center;
+                    .logo{
+                        width: 70px;
+                        height: 70px;
+                        background-color: red;
+                        border-radius: 10px;
+                    }
+                    .title_info{
+                        margin-left: 7px;
+                    }
+                }
+                .btn_Upgrade{
+                    font-weight: 500;
+                    color: #266dde;
+                }
+                
+            }
+        }
+    }
+
+    // 账户
+    .setContent2{
+        max-width: 1000px;
+        min-height: 80vh;
+        max-height: 80vh;
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        border-top: none;
+        padding: 24px;
+
+        .ul{
+            width: 900px;
+            .details{
+                font-size: 18px;
+                font-weight: 700;
+                color: #000;
+            }
+            .li{
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .lable{
+                    font-size: 16px;
+                }
+                .edit_icon{
+                    font-size: 18px;
+                }
+            }
+            .li:nth-of-type(5){
+                border-bottom: none;
+            }
+            .li:nth-of-type(6){
+                border-bottom: none;
+                .lable{
+                    font-size: 16px;
+                    .title{
+                        font-size: 18px;
+                        color: #000;
+                    }
+                    .content{
+                        color: #7d8187;
+                    }
+                }
+            }
+        }
+    }
+
+    // 团队和用户
+    .setContent3{
+        max-width: 1000px;
+        min-height: 80vh;
+        max-height: 80vh;
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        border-top: none;
+        padding: 24px;
+        .team{
+            width: 900px;
+            padding: 20px 0;
+            background-color: #f4f4f4;
+            border-radius: 20px;
+            // display: flex;
+            // flex-direction: column;
+            // justify-content: center;
+            // align-items: center;
+            text-align: center;
+            .Workspace{
+                font-size: 18px;
+                color: #000;
+                font-weight: 500;
+            }
+            .available{
+                font-size: 16px;
+                color: #000;
+            }
+        }
+        .yourTeam{
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .you{
+                .Your{
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: #000;
+                }
+                .pending{
+                    font-size: 16px;
+                    color: #87939c;
+                }
+            }
+            .newMember{
+                font-size: 16px;
+                height: 40px;
+            }
+        }
+        .bottom{
+            margin-top: 300px;
+            text-align: center;
+            .problem{
+                font-size: 16px;
+                color: #87939c;
+            }
+            .btn{
+                margin-top: 10px;
+
+                .btn_n{
+                    font-size: 14px;
+                    font-weight: 500;
+                    margin: 0 5px;
+                }
+            }
+        }
+    }
+
+    // 计费
+    .setContent4{
+        max-width: 1000px;
+        min-height: 80vh;
+        max-height: 80vh;
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        border-top: none;
+        padding: 24px;
+        .billing{
+            display: flex;
+            .left{
+                flex: 1;
+                .Summary{
+                    p{
+                        font-size: 16px;
+                    }
+                }
+                .payment{
+                    // background-color: red;
+                    padding: 20px 0;
+                    border-top: 1px solid #eee;
+                    border-bottom: 1px solid #eee;
+                    .details{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .d_title{
+                            flex: 1;
+                            font-size: 16px;
+                            font-weight: 500;
+                        }
+                        .edit{
+                            width: 50px;
+                        }
+                    }
+                    .paypal{
+                        font-size: 16px;
+                        color: #7d8187;
+                    }
+                }
+                .payment_b{
+                    border-top: none;
+                    border-bottom: none;
+                }
+            }
+            .right{
+                width: 500px;
+                height: 320px;
+                margin-left: 10px;
+                background-color: #f4f4f4;
+                padding: 0 20px;
+                border-radius: 12px;
+                .li{
+                    padding: 20px 0;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .lable{
+                        font-size: 16px;
+                        color: #000;
+                        font-weight: 500;
+                    }
+                    .content{
+                        font-size: 16px;
+                    }
+                }
+                .li:nth-of-type(4){
+                    border-top: 1px solid #ccc;
+                    border-bottom: 1px solid #ccc;
+                }
+            }
+        }
+        .btn{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 300px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+            .btn_n{
+                font-size: 16px;
+            }
+            .btn_config{
+                margin-left: 10px;
+            }
+        }
+    }
+
+
+    // 发票
+    .setContent5{
+        max-width: 1000px;
+        min-height: 80vh;
+        max-height: 80vh;
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        border-top: none;
+        padding: 24px;
+        .invoice{
+            width: 900px;
+            .title{
+                font-size: 18px;
+                font-weight: 700;
+                color: #000;
+            }
+            .table{
+                margin-top: 10px;
+            }
+        }
+
+    }
+}
