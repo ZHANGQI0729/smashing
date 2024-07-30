@@ -53,9 +53,6 @@ const JWTLogin = ({ ...others }) => {
   return (
     <Formik
       initialValues={{
-        client_id: 'Smashing_App',
-        grant_type: 'password',
-        scope: 'Smashing',
         username: 'admin',
         password: '1q2w3E*'
       }}
