@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Tabs, Button, Popover, Table } from 'antd';
 import {
@@ -13,11 +13,50 @@ import {
   PlusOutlined,
   UndoOutlined
 } from '@ant-design/icons';
+import { gteam } from '../../api/setting/index';
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import Avatar from 'components/ui-component/extended/Avatar';
+import SubCard from 'components/ui-component/cards/SubCard';
+import { gridSpacing } from 'store/constant';
 
 import '../../scss/setting.scss';
 // ==============================|| SAMPLE PAGE ||============================== //
 
+const Avatar3 = '/assets/images/users/avatar-3.png';
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2)
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1)
+  }
+}));
+
 const SettingPage = () => {
+  // 请求团队
+  const gteamfun = async () => {
+    const res = await gteam();
+    console.log('团队', res);
+    // if (res.status === 200) {
+    //   setloading(false);
+    //   usetabledata(res.data.list);
+    //   setcounts(res.data.total);
+    // }
+  };
+
+  useEffect(() => {
+    gteamfun();
+  }, []);
+
   const arr = [1];
 
   // 社交内容
@@ -37,6 +76,16 @@ const SettingPage = () => {
       </p>
     </div>
   );
+
+  // Link Socials 弹窗
+  const [openl, setOpenl] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpenl(true);
+  };
+  const handleClose = () => {
+    setOpenl(false);
+  };
 
   // 发票表格数据
   const dataSource = [
@@ -111,12 +160,12 @@ const SettingPage = () => {
                 <div className="society_li">
                   <div className="society_top">
                     <div className="society_info">
-                      <div className="title">张 琪's Social Group</div>0 of 4 socials connected
+                      <div className="title">张 琪s Social Group</div>0 of 4 socials connected
                     </div>
                     <div className="logo">图标</div>
                   </div>
                   <div className="btn">
-                    <Button type="primary" icon={<UndoOutlined />} className="btn_link">
+                    <Button type="primary" icon={<UndoOutlined />} className="btn_link" onClick={handleClickOpen}>
                       Link Socials
                     </Button>
                     <Popover placement="rightTop" trigger="click" content={content}>
@@ -344,6 +393,131 @@ const SettingPage = () => {
     <div>
       <div>
         <Tabs defaultActiveKey="2" items={items} />
+        <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={openl}>
+          <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+            Edit Socials for 张琪
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500]
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <DialogContent
+            style={{
+              width: '750px',
+              backgroundColor: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              borderRadius: '10px'
+            }}
+          >
+            <Grid container spacing={gridSpacing}>
+              <Grid item lg={6} xs={12}>
+                <div style={{ fontSize: '16px', marginBottom: '20px' }}>You may link one of each Social type to a .</div>
+                <SubCard
+                  title={
+                    <Grid container spacing={2} alignItems="center">
+                      <Grid item>
+                        <Avatar alt="User 1" src={Avatar3} />
+                      </Grid>
+                      <Grid item xs zeroMinWidth>
+                        <Typography variant="subtitle1">账号</Typography>
+                        <Typography variant="subtitle2">UI/UX Designer</Typography>
+                      </Grid>
+                      <Grid item>
+                        {/* <Chip size="small" label="Pro" color="primary" /> */}
+                        <Button type="primary">connect</Button>
+                      </Grid>
+                    </Grid>
+                  }
+                >
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item>
+                      <Avatar alt="User 1" src={Avatar3} />
+                    </Grid>
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="subtitle1">账号</Typography>
+                      <Typography variant="subtitle2">UI/UX Designer</Typography>
+                    </Grid>
+                    <Grid item>
+                      <Button type="primary">connect</Button>
+                    </Grid>
+                  </Grid>
+                </SubCard>
+                <SubCard
+                  title={
+                    <Grid container spacing={2} alignItems="center">
+                      <Grid item>
+                        <Avatar alt="User 1" src={Avatar3} />
+                      </Grid>
+                      <Grid item xs zeroMinWidth>
+                        <Typography variant="subtitle1">账号</Typography>
+                        <Typography variant="subtitle2">UI/UX Designer</Typography>
+                      </Grid>
+                      <Grid item>
+                        <Button type="primary">connect</Button>
+                      </Grid>
+                    </Grid>
+                  }
+                >
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item>
+                      <Avatar alt="User 1" src={Avatar3} />
+                    </Grid>
+                    <Grid item xs zeroMinWidth>
+                      <Typography variant="subtitle1">账号</Typography>
+                      <Typography variant="subtitle2">UI/UX Designer</Typography>
+                    </Grid>
+                    <Grid item>
+                      <Button type="primary">connect</Button>
+                    </Grid>
+                  </Grid>
+                </SubCard>
+              </Grid>
+              <Grid item lg={6} xs={12}>
+                <div style={{ fontSize: '16px', marginBottom: '20px' }}>Save time. Improve results. Get productive.</div>
+                <Grid container spacing={gridSpacing}>
+                  <Grid item xs={12}>
+                    <SubCard>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <Typography variant="subtitle1">Once linked you can...</Typography>
+                          <Typography variant="subtitle2">Schedule your posts in advance</Typography>
+                          <Typography variant="subtitle2">Get tailored suggestions and tips</Typography>
+                          <Typography variant="subtitle2">Access in-depth analytics</Typography>
+                        </Grid>
+                        <Grid item xs={12} sx={{ display: { xs: 'block' } }}>
+                          <Divider />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Typography variant="subtitle1">Keeping your account and data safe</Typography>
+                          <Typography variant="subtitle2">Only uses official partner platform API’s</Typography>
+                          <Typography variant="subtitle2">We take our data privacy seriously</Typography>
+                        </Grid>
+                        <Grid item xs={12} sx={{ display: { xs: 'block' } }}>
+                          <Divider />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Typography variant="subtitle1">Keeping your account and data safe</Typography>
+                          <Typography variant="subtitle2">Only uses official partner platform API’s</Typography>
+                          <Typography variant="subtitle2">We take our data privacy seriously</Typography>
+                        </Grid>
+                      </Grid>
+                    </SubCard>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </DialogContent>
+        </BootstrapDialog>
       </div>
     </div>
   );

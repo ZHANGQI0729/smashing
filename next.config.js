@@ -3,6 +3,37 @@
 module.exports = {
   // todo: this need to set to true or remove it as default is true. set false as chart was giving error when first render
   // https://github.com/apexcharts/apexcharts.js/issues/3652
+  // async headers() {
+  //   return [
+  //     {
+  //       // Apply these headers to all routes in your application.
+  //       source: '/:path*',
+  //       headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }]
+  //     }
+  //   ];
+  // },
+
+  async headers() {
+    return [
+      {
+        source: '/api/v1/:slug',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://auth.smashing.one/' // 设置你的来源
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, OPTIONS'
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type, Authorization'
+          }
+        ]
+      }
+    ];
+  },
   reactStrictMode: false,
   modularizeImports: {
     '@mui/material': {
@@ -21,6 +52,7 @@ module.exports = {
   env: {
     REACT_APP_VERSION: process.env.REACT_APP_VERSION,
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
+    REACT_APP_TOKEN_URL: process.env.REACT_APP_TOKEN_URL,
 
     REACT_APP_MAPBOX_ACCESS_TOKEN: process.env.REACT_APP_MAPBOX_ACCESS_TOKEN,
 

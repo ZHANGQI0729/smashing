@@ -39,6 +39,7 @@ const verifyToken = (serviceToken) => {
 const setSession = (serviceToken) => {
   if (serviceToken) {
     localStorage.setItem('serviceToken', serviceToken);
+    // localStorage.setItem('serviceToken', `Bearer ${serviceToken}`);
     axios.defaults.headers.common.Authorization = `Bearer ${serviceToken}`;
   } else {
     localStorage.removeItem('serviceToken');
@@ -87,8 +88,10 @@ export const JWTProvider = ({ children }) => {
   const login = async (client_id, grant_type, scope, username, password) => {
     // eslint-disable-next-line camelcase
     const response = await axiostoken.post('connect/token', { client_id, grant_type, scope, username, password });
-    const { serviceToken, user } = response.data;
-    setSession(serviceToken);
+    const { user } = response.data;
+    console.log('response', response);
+    console.log('accessToken', response.data.access_token);
+    setSession(response.data.access_token);
     dispatch({
       type: LOGIN,
       payload: {
@@ -131,9 +134,9 @@ export const JWTProvider = ({ children }) => {
     dispatch({ type: LOGOUT });
   };
 
-  const resetPassword = async () => { };
+  const resetPassword = async () => {};
 
-  const updateProfile = () => { };
+  const updateProfile = () => {};
 
   if (state.isInitialized !== undefined && !state.isInitialized) {
     return <Loader />;
