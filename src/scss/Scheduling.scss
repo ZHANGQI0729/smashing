@@ -37,7 +37,14 @@
 .ant-select-dropdown-placement-bottomLeft {
     z-index: 99998 !important;
 }
-
+.ant-dropdown{
+    .ant-checkbox-group{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding:10px;
+    }
+}
 .box {
     display: flex;
     align-items: center;
@@ -58,6 +65,20 @@
 
 .mui-12kbpvc-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
     color: #673ab7 !important;
+}
+
+.products_box {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: #e8e8e8;
+    border: 1px solid #ffffff;
+
+    .products_box_del {
+        z-index: 10000 !important;
+    }
 }
 
 .globalkeyevents_box {

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "748202",
+      "name": "三个点点",
+      "font_class": "sangediandian",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
       "icon_id": "1264",
       "name": "编辑",
       "font_class": "bianji",
