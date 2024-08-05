@@ -48,6 +48,13 @@
       "unicode_decimal": 58905
     },
     {
+      "icon_id": "41303945",
+      "name": "右转",
+      "font_class": "youzhuan-copy",
+      "unicode": "eac6",
+      "unicode_decimal": 60102
+    },
+    {
       "icon_id": "1277255",
       "name": "arrow-left",
       "font_class": "arrow-left",
