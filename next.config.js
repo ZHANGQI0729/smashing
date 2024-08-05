@@ -13,24 +13,37 @@ module.exports = {
   //   ];
   // },
 
-  async headers() {
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/api/v1/:slug',
+  //       headers: [
+  //         {
+  //           key: 'Access-Control-Allow-Origin',
+  //           value: 'https://auth.smashing.one/' // 设置你的来源
+  //           // value: 'https://api.smashing.one/' // 设置你的来源
+  //         },
+  //         {
+  //           key: 'Access-Control-Allow-Methods',
+  //           value: 'GET, POST, PUT, DELETE, OPTIONS'
+  //         },
+  //         {
+  //           key: 'Access-Control-Allow-Headers',
+  //           value: 'Content-Type, Authorization'
+  //         }
+  //       ]
+  //     }
+  //   ];
+  // },
+  async rewrites() {
     return [
       {
-        source: '/api/v1/:slug',
-        headers: [
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: 'https://auth.smashing.one/' // 设置你的来源
-          },
-          {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, PUT, DELETE, OPTIONS'
-          },
-          {
-            key: 'Access-Control-Allow-Headers',
-            value: 'Content-Type, Authorization'
-          }
-        ]
+        source: '/connect/:path*',
+        destination: `https://auth.smashing.one/:path*`
+      },
+      {
+        source: '/api/:path*',
+        destination: `https://api.smashing.one/:path*`
       }
     ];
   },

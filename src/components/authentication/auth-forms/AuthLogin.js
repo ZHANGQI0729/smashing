@@ -53,6 +53,9 @@ const JWTLogin = ({ ...others }) => {
   return (
     <Formik
       initialValues={{
+        client_id: 'Smashing_App',
+        grant_type: 'password',
+        scope: 'Smashing',
         username: 'admin',
         password: '1q2w3E*'
       }}
@@ -71,7 +74,7 @@ const JWTLogin = ({ ...others }) => {
             setSubmitting(false);
           }
         } catch (err) {
-          console.error(err);
+          console.error(123, err);
           if (scriptedRef.current) {
             setStatus({ success: false });
             setErrors({ submit: err.message });

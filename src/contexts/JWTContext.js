@@ -85,7 +85,7 @@ export const JWTProvider = ({ children }) => {
   }, []);
 
   // eslint-disable-next-line camelcase
-  const login = async (client_id, grant_type, username, password) => {
+  const login = async (client_id, grant_type, scope, username, password) => {
     // eslint-disable-next-line camelcase
     const response = await axiostoken.post('connect/token', { client_id, grant_type, scope, username, password });
     const { user } = response.data;

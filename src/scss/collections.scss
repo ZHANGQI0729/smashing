@@ -1,0 +1,47 @@
+.boxs{
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    // justify-content: center;
+    // align-items: center;
+    flex-direction: column;
+    .title{
+        margin: 40px 0;
+    }
+    .once{
+        padding: 0 0 10px 0;
+    }
+    .content{
+        margin: 20px 0;
+        font-size: 16px;
+    }
+    .btn{
+        margin: 20px;
+    }
+    
+}
+.tabcontent{
+    width: 100%;
+    // min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.mui-tmnkt9-MuiPaper-root-MuiDialog-paper {
+    min-width: 750px !important;
+    max-width: none !important;
+}
+
+.newc{
+    width: 260px;
+    height: 50px;
+    display: flex;
+    // justify-content: center;
+    margin-left: 20px;
+    align-items: center;
+    font-size: 18px;
+    color: rgb(49, 116, 224);
+}
