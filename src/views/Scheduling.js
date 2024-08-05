@@ -557,6 +557,7 @@ const SchedulingPage = () => {
   const handleRangeSelect = (arg) => {
     console.log('你好', arg.start, arg.end);
     const calendarEl = calendarRef.current;
+    setcreatepost(true)
     if (calendarEl) {
       const calendarApi = calendarEl.getApi();
       calendarApi.unselect();
@@ -1646,7 +1647,8 @@ const SchedulingPage = () => {
                 <Upload {...props}>
                   <Button icon={<UploadOutlined />}>Upload</Button>
                 </Upload>
-                <Input.TextArea rows={5} style={{ marginTop: '50px', marginBottom: '20px' }} />
+                <Input.TextArea rows={5} style={{ marginTop: '50px', marginBottom: '20px',height:'300px' }} />
+
               </div>
             </div>
           </div>

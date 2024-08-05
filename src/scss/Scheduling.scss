@@ -13,7 +13,7 @@
 }
 
 .mui-tmnkt9-MuiPaper-root-MuiDialog-paper {
-    min-width: 600px !important;
+    min-width: 700px !important;
     max-width: none !important;
 }
 
@@ -57,7 +57,7 @@
 
     .box_left {
         width: 150px;
-        height: 50vh;
+        height: 45vh !important;
         overflow-y: auto;
         display: flex;
         align-items: center;
@@ -82,7 +82,7 @@
     .box_right{
         width: 100%;
         overflow-y: auto;
-        height: 50vh;
+        height: 45vh !important;
         padding: 20px;
         padding-bottom: 50px;
         .box_right_title{
