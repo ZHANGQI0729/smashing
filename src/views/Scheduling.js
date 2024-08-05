@@ -7,7 +7,7 @@
 /* eslint-disable lines-around-directive */
 'use client';
 import { FormattedMessage } from 'react-intl';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import {
   Card,
@@ -29,7 +29,8 @@ import {
   Space,
   InputNumber,
   theme,
-  message
+  message,
+  DatePicker
 } from 'antd';
 import { useRouter } from 'next/navigation';
 import { TikTokOutlined, FacebookOutlined, PlusOutlined, DownOutlined } from '@ant-design/icons';
@@ -42,6 +43,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import { UploadOutlined } from '@ant-design/icons';
 // eslint-disable-next-line import/no-unresolved
 // import { LocalizationProvider, MobileDateTimePicker } from '@mui/x-date-pickers';
 import PropTypes from 'prop-types';
@@ -55,6 +57,17 @@ import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../scss/Scheduling.scss';
 import SubCard from 'components/ui-component/cards/SubCard';
+import FullCalendar from '@fullcalendar/react';
+import listPlugin from '@fullcalendar/list';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import timelinePlugin from '@fullcalendar/timeline';
+import interactionPlugin from '@fullcalendar/interaction';
+import { dispatch, useSelector } from 'store';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Toolbar from 'components/application/calendar/Toolbar';
+import { getEvents, addEvent, updateEvent, removeEvent } from 'store/slices/calendar';
+const { RangePicker } = DatePicker;
 // eslint-disable-next-line import/no-unresolved
 // import FullCalendar from '@fullcalendar/react';
 // ==============================|| SAMPLE PAGE ||=======;======================= //
@@ -450,6 +463,157 @@ const SchedulingPage = () => {
     }
     setemitantdel(e.key);
   };
+  // 日历数据
+  const [loading, setLoading] = useState(true);
+  const calendarRef = useRef(null);
+  const matchSm = useMediaQuery((theme) => theme?.breakpoints.down('md'));
+  const [events, setEvents] = useState([]);
+  const calendarState = useSelector((state) => state.calendar);
+  const [fullcalendardate, setfullcalendarDate] = useState(new Date());
+  const [view, setView] = useState(matchSm ? 'listWeek' : 'dayGridMonth');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRange, setSelectedRange] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  // calendar event select/add/edit/delete
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedEvent(null);
+    setSelectedRange(null);
+  };
+
+  const handleEventUpdate = async ({ event }) => {
+    console.log('1111');
+    try {
+      dispatch(
+        updateEvent({
+          eventId: event.id,
+          update: {
+            allDay: event.allDay,
+            start: event.start,
+            end: event.end
+          }
+        })
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const handleEventSelect = (arg) => {
+
+    if (arg.event.id) {
+      const selectEvent = events.find((_event) => _event.id === arg.event.id);
+      setSelectedEvent(selectEvent);
+    } else {
+      setSelectedEvent(null);
+    }
+    setIsModalOpen(true);
+  };
+
+  // calendar toolbar events
+  const handleDateToday = () => {
+    const calendarEl = calendarRef.current;
+
+    if (calendarEl) {
+      const calendarApi = calendarEl.getApi();
+
+      calendarApi.today();
+      setfullcalendarDate(calendarApi.getDate());
+    }
+  };
+
+  const handleViewChange = (newView) => {
+    const calendarEl = calendarRef.current;
+
+    if (calendarEl) {
+      const calendarApi = calendarEl.getApi();
+
+      calendarApi.changeView(newView);
+      setView(newView);
+    }
+  };
+
+  const handleDatePrev = () => {
+    const calendarEl = calendarRef.current;
+
+    if (calendarEl) {
+      const calendarApi = calendarEl.getApi();
+
+      calendarApi.prev();
+      setfullcalendarDate(calendarApi.getDate());
+    }
+  };
+
+  const handleDateNext = () => {
+    const calendarEl = calendarRef.current;
+
+    if (calendarEl) {
+      const calendarApi = calendarEl.getApi();
+
+      calendarApi.next();
+      setfullcalendarDate(calendarApi.getDate());
+    }
+  };
+  const handleRangeSelect = (arg) => {
+    console.log('你好', arg.start, arg.end);
+    const calendarEl = calendarRef.current;
+    if (calendarEl) {
+      const calendarApi = calendarEl.getApi();
+      calendarApi.unselect();
+    }
+
+    setSelectedRange({
+      start: arg.start,
+      end: arg.end
+    });
+    setIsModalOpen(true);
+  };
+  // 创建发布内容弹出层
+  const [createpost, setcreatepost] = useState(false);
+  // 关闭弹出层
+  const createpostOk = () => {
+    setcreatepost(false)
+  }
+
+  useEffect(() => {
+    dispatch(getEvents()).then(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    setEvents(calendarState?.events);
+  }, [calendarState]);
+
+  // 点击草稿
+  let [ifcao, setifcao] = useState(false)
+  let [caotitle, setcaotitle] = useState('')
+  const gocaogao = (e) => {
+    console.log('点击草稿', e);
+    if (e == 'Draft Posts') {
+      setcaotitle('Schedulingmediadraft')
+    } else {
+      setcaotitle('Schedulingmediarecent')
+    }
+    setifcao(true)
+  }
+  // 创建上传视频或图片
+  const props = {
+    action: '//jsonplaceholder.typicode.com/posts/',
+    listType: 'picture',
+    async previewFile(file) {
+      console.log('Your upload file:', file);
+      // Your process logic. Here we just mock to the same file
+      const res = await fetch('https://next.json-generator.com/api/json/get/4ytyBoLK8', {
+        method: 'POST',
+        body: file,
+      });
+      const { thumbnail } = await res.json();
+      return thumbnail;
+    },
+  };
+  const onOk = (value) => {
+    console.log('onOk: ', value);
+  };
+
   return (
     <div className="Scheduling">
       <BootstrapDialog onClose={brandhubhandleOk} aria-labelledby="customized-dialog-title" open={isbrandhub}>
@@ -1317,65 +1481,75 @@ const SchedulingPage = () => {
         onClose={onClose}
         open={open}
       >
-        <div
-          style={{
-            lineHeight: '30px',
-            fontSize: '15px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontWeight: '700'
-          }}
-        >
-          <div>
-            <i className="iconfont icon-caogao" style={{ color: 'grey' }}>
-              {' '}
-            </i>{' '}
-            <FormattedMessage id="Schedulingmediadraft" />
-          </div>
-          <i className="iconfont icon-youzhuan" style={{ color: 'grey' }}>
-            {' '}
-          </i>
-        </div>
-        <div
-          style={{
-            lineHeight: '30px',
-            fontSize: '15px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontWeight: '700'
-          }}
-        >
-          <div>
-            <i className="iconfont icon-xiaoxi" style={{ color: 'grey' }} /> <FormattedMessage id="Schedulingmediarecent" />
-          </div>
-          <i className="iconfont icon-youzhuan" style={{ color: 'grey' }} />
-        </div>
-        <div style={{ marginTop: '30px', lineHeight: '30px', fontSize: '16px' }}>
-          <FormattedMessage id="SchedulingmediaUploaded" />
-        </div>
-        <Upload
-          action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-          listType="picture-card"
-          fileList={fileList}
-          onPreview={handlePreview}
-          onChange={handleChange}
-        >
-          {fileList?.length >= 8 ? null : uploadButton}
-        </Upload>
-        {previewImage && (
-          <Image
-            wrapperStyle={{ display: 'none' }}
-            preview={{
-              visible: previewOpen,
-              onVisibleChange: (visible) => setPreviewOpen(visible),
-              afterOpenChange: (visible) => !visible && setPreviewImage('')
+        {!ifcao ? <div>
+          {/* 草稿 */}
+          <div
+            style={{
+              lineHeight: '30px',
+              fontSize: '15px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              fontWeight: '700'
             }}
-            src={previewImage}
-          />
-        )}
-      </Drawer>
+            onClick={() => gocaogao('Draft Posts')}
+          >
+            <div>
+              <i className="iconfont icon-caogao" style={{ color: 'grey', marginRight: '3px' }}>
+              </i>
+              <FormattedMessage id="Schedulingmediadraft" />
+            </div>
+            <i className="iconfont icon-youzhuan" style={{ color: 'grey' }}>
+            </i>
+          </div>
+          {/* 消息 */}
+          <div
+            style={{
+              lineHeight: '30px',
+              fontSize: '15px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              fontWeight: '700'
+            }}
+            onClick={() => gocaogao('Recent Notifications')}
+          >
+            <div>
+              <i className="iconfont icon-xiaoxi" style={{ color: 'grey' }} /> <FormattedMessage id="Schedulingmediarecent" />
+            </div>
+            <i className="iconfont icon-youzhuan" style={{ color: 'grey' }} />
+          </div>
+          <div style={{ marginTop: '30px', lineHeight: '30px', fontSize: '16px' }}>
+            <FormattedMessage id="SchedulingmediaUploaded" />
+          </div>
+          <Upload
+            action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={handlePreview}
+            onChange={handleChange}
+          >
+            {fileList?.length >= 8 ? null : uploadButton}
+          </Upload>
+          {previewImage && (
+            <Image
+              wrapperStyle={{ display: 'none' }}
+              preview={{
+                visible: previewOpen,
+                onVisibleChange: (visible) => setPreviewOpen(visible),
+                afterOpenChange: (visible) => !visible && setPreviewImage('')
+              }}
+              src={previewImage}
+            />
+          )}
+        </div> : <div>
+          <div style={{ fontWeight: '700', alignContent: 'center' }} onClick={() => setifcao(false)}>
+            <i className="iconfont icon-youzhuan-copy" />
+            <FormattedMessage id={caotitle} />
+          </div>
+
+        </div>}
+      </Drawer >
       <div className="Scheduling_top">
         <div className="Scheduling_top_left">
           <div className="Scheduling_top_left_title">
@@ -1410,7 +1584,7 @@ const SchedulingPage = () => {
           <Button type="text" style={{ marginLeft: '10px' }} onClick={brandhubshowModal}>
             <i className="iconfont icon-shangdian"> </i> <FormattedMessage id="SchedulingBrand" />
           </Button>
-          <Button type="primary" style={{ marginLeft: '10px' }}>
+          <Button type="primary" style={{ marginLeft: '10px' }} onClick={() => setcreatepost(true)}>
             + <FormattedMessage id="Schedulingcreate" />
           </Button>
         </div>
@@ -1440,8 +1614,72 @@ const SchedulingPage = () => {
           </Button>
         </div>
       </div>
-      <SubCard>
-        {/* <FullCalendar
+      {/* 创建的弹出层 */}
+      <div className='create'>
+        <BootstrapDialog onClose={createpostOk} aria-labelledby="customized-dialog-title" open={createpost}>
+          <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+            <FormattedMessage id="Create Multi-Platform Post" />
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={createpostOk}
+            sx={(theme) => ({
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: theme.palette.grey[500]
+            })}
+          >
+            <CloseIcon />
+          </IconButton>
+          <div className='box'>
+            <div className='box_left'>
+              <div className='instagram'><div className='circle'>+</div><div>Instagram</div></div>
+              <div className='facebook'><div className='circle'>+</div><div>Facebook</div></div>
+              <div className='tiktok'><div className='circle'>+</div><div>TikTok</div></div>
+              <div className='linkedin'><div className='circle'>+</div><div>Linkedin</div></div>
+            </div>
+            <div className='box_right'>
+              <div className='box_right_title'><i className='iconfont icon-tupian'></i> <FormattedMessage id="Your Post" /></div>
+              <div className='box_right_context'>
+                <div className='box_right_text'><FormattedMessage id="Add Media" /></div>
+                <Upload {...props}>
+                  <Button icon={<UploadOutlined />}>Upload</Button>
+                </Upload>
+                <Input.TextArea rows={5} style={{ marginTop: '50px', marginBottom: '20px' }} />
+              </div>
+            </div>
+          </div>
+          <DialogActions style={{ backgroundColor: '#fafafa',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
+            {/* <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}> */}
+            <DatePicker
+              showTime
+              onChange={(value, dateString) => {
+                console.log('Selected Time: ', value);
+                console.log('Formatted Selected Time: ', dateString);
+              }}
+              onOk={onOk}
+            />
+            <Button type="primary" onClick={createpostOk}>
+              <FormattedMessage id="SchedulingBrandSave" />
+            </Button>
+            {/* </div> */}
+            
+          </DialogActions>
+        </BootstrapDialog>
+      </div>
+      {/* 事件表 */}
+      <Toolbar
+        date={fullcalendardate}
+        view={view}
+        onClickNext={handleDateNext}
+        onClickPrev={handleDatePrev}
+        onClickToday={handleDateToday}
+        onChangeView={handleViewChange}
+        style={{ marginTop: "10px" }}
+      />
+      <SubCard style={{ marginTop: "0px" }}>
+        <FullCalendar
           weekends
           editable
           droppable
@@ -1449,10 +1687,11 @@ const SchedulingPage = () => {
           events={events}
           ref={calendarRef}
           rerenderDelay={10}
-          initialDate={date}
+          initialDate={fullcalendardate}
           initialView={view}
           dayMaxEventRows={3}
           eventDisplay="block"
+          schedulerLicenseKey='GPL-My-Project-Is-Open-source'
           headerToolbar={false}
           allDayMaintainDuration
           eventResizableFromStart
@@ -1462,9 +1701,9 @@ const SchedulingPage = () => {
           eventResize={handleEventUpdate}
           height={matchSm ? 'auto' : 720}
           plugins={[listPlugin, dayGridPlugin, timelinePlugin, timeGridPlugin, interactionPlugin]}
-        /> */}
+        />
       </SubCard>
-    </div>
+    </div >
   );
 };
 

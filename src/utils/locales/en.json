@@ -125,5 +125,8 @@
   "Linked Imagery":"Linked Imagery",
   "Edit Category":"Edit Category",
   "Delete Category":"Delete Category",
-  "DeleteCategorytext":"Are you sure you want to delete this category? This cannot be undone."
+  "DeleteCategorytext":"Are you sure you want to delete this category? This cannot be undone.",
+  "Create Multi-Platform Post":"Create Multi-Platform Post",
+  "Add Media":"Add Media",
+  "Start writing your caption":"+ Start writing your caption"
 }

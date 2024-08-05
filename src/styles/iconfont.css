@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4606521 */
-  src: url('iconfont.woff2?t=1722240916145') format('woff2'),
-       url('iconfont.woff?t=1722240916145') format('woff'),
-       url('iconfont.ttf?t=1722240916145') format('truetype');
+  src: url('iconfont.woff2?t=1722566000880') format('woff2'),
+       url('iconfont.woff?t=1722566000880') format('woff'),
+       url('iconfont.ttf?t=1722566000880') format('truetype');
 }
 
 .iconfont {
@@ -35,6 +35,10 @@
 
 .icon-xiaoxi:before {
   content: "\e619";
+}
+
+.icon-youzhuan-copy:before {
+  content: "\eac6";
 }
 
 .icon-arrow-left:before {
