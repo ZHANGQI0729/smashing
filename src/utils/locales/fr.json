@@ -123,5 +123,8 @@
   "DeleteCategorytext":"Êtes-vous sûr de vouloir supprimer cette catégorie? Cela ne peut être réparé.",
   "Create Multi-Platform Post":"Création de postes multiplateformes",
   "Add Media":"Ajouter un média",
-  "Start writing your caption":"+ commencez à écrire votre légende"
+  "Start writing your caption":"+ commencez à écrire votre légende",
+  "Your Post":"Votre message",
+  "Please select a time":"Veuillez sélectionner une heure",
+  "Please enter title":"Veuillez entrer le titre"
 }

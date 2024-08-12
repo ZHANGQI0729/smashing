@@ -13,7 +13,7 @@
 }
 
 .mui-tmnkt9-MuiPaper-root-MuiDialog-paper {
-    min-width: 600px !important;
+    min-width: 700px !important;
     max-width: none !important;
 }
 
@@ -57,7 +57,7 @@
 
     .box_left {
         width: 150px;
-        height: 50vh;
+        height: 45vh !important;
         overflow-y: auto;
         display: flex;
         align-items: center;
@@ -82,15 +82,15 @@
     .box_right{
         width: 100%;
         overflow-y: auto;
-        height: 50vh;
+        height: 45vh !important;
         padding: 20px;
         padding-bottom: 50px;
         .box_right_title{
             font-size:16px;
         }
         .box_right_context{
-            width: 500px;
-            height: 100px;
+            // width: 500px;
+            // height: ;
             margin-top: 10px;
             padding: 10px;
             border-radius: 10px;
@@ -103,14 +103,18 @@
                 font-weight: 700;
                 color: #666;
                 margin-bottom: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
         }
     }
 }
-:where(.css-dev-only-do-not-override-f7vrd6).ant-upload-wrapper .ant-upload-list .ant-upload-list-item-container {
-    transition: opacity 0.3s, height 0.3s;
-    display: none;
-}
+// :where(.css-dev-only-do-not-override-f7vrd6).ant-upload-wrapper .ant-upload-list .ant-upload-list-item-container {
+//     transition: opacity 0.3s, height 0.3s;
+//     display: none;
+// }
 .keyEvents_left {
     display: flex;
     align-items: center;
