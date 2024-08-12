@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -42,6 +43,8 @@ const User1 = '/assets/images/users/user-round.svg';
 // ==============================|| PROFILE MENU ||============================== //
 
 const ProfileSection = () => {
+  const router = useRouter();
+
   const theme = useTheme();
   const { borderRadius } = useConfig();
   // const navigate = useNavigate();
@@ -72,9 +75,10 @@ const ProfileSection = () => {
     setOpen(false);
   };
 
-  const handleListItemClick = (event, index) => {
+  const handleListItemClick = (event, index, url) => {
     setSelectedIndex(index);
     handleClose(event);
+    router.push(url);
   };
 
   const handleToggle = () => {
@@ -241,7 +245,7 @@ const ProfileSection = () => {
                           <ListItemButton
                             sx={{ borderRadius: `${borderRadius}px` }}
                             selected={selectedIndex === 0}
-                            onClick={(event) => handleListItemClick(event, 0, '/user/account-profile/profile1')}
+                            onClick={(event) => handleListItemClick(event, 0, '/setting')}
                           >
                             <ListItemIcon>
                               <IconSettings stroke={1.5} size="20px" />

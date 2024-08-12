@@ -62,10 +62,7 @@ instance.interceptors.response.use(
   }
 );
 
-const get = (url, params) => {
-  console.log('get', url, params);
-  return instance.get(url, { params });
-};
+const get = (url, params) => instance.get(url, { params });
 const post = (url, data, config) => instance.post(url, data, config);
 const del = (url, params) => instance.delete(url, { params });
 const put = (url, data) => instance.put(url, data);

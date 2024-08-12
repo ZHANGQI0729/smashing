@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Tabs, Button, Popover, Table } from 'antd';
+import { Tabs, Popover, Table, Space, Button as AntButton } from 'antd';
 import {
   HomeOutlined,
   MailOutlined,
@@ -13,7 +13,6 @@ import {
   PlusOutlined,
   UndoOutlined
 } from '@ant-design/icons';
-import { gteam } from '../../api/setting/index';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -27,7 +26,18 @@ import Grid from '@mui/material/Grid';
 import Avatar from 'components/ui-component/extended/Avatar';
 import SubCard from 'components/ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import Button from '@mui/material/Button';
+import { dispatch } from 'store';
+import { openSnackbar } from 'store/slices/snackbar';
 
+import { gteam, cteam, dteam, gusersemail, socialAccountp } from '../../api/setting/index';
 import '../../scss/setting.scss';
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -42,16 +52,96 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 const SettingPage = () => {
+  const [teamList, setTeamList] = useState([]);
   // 请求团队
   const gteamfun = async () => {
     const res = await gteam();
     console.log('团队', res);
-    // if (res.status === 200) {
-    //   setloading(false);
-    //   usetabledata(res.data.list);
-    //   setcounts(res.data.total);
-    // }
+    if (res.status === 200) {
+      setTeamList(res.data.items);
+    }
   };
+  // 添加团队
+  const [opentc, setOpentc] = React.useState(false);
+  const handleClickOpentc = () => {
+    setOpentc(true);
+  };
+  const handleClosetc = () => {
+    setOpentc(false);
+  };
+  const validationSchema = yup.object({
+    emailInstant: yup.string().email('Enter a valid email').required('Email is required')
+  });
+  const formik = useFormik({
+    initialValues: {
+      emailInstant: ''
+    },
+    validationSchema,
+    onSubmit: async (value) => {
+      // const res = await gusersemail(value.emailInstant);
+      // console.log('验证邮箱', res);
+      const cres = await cteam({ teamMemberId: '3fa85f64-5717-4562-b3fc-2c963f66afa6', role: 0 });
+      console.log('cres', cres);
+      if (cres.status === 200) {
+        handleClosetc();
+        gteamfun();
+        formik.values.emailInstant = '';
+        dispatch(
+          openSnackbar({
+            open: true,
+            message: '成功',
+            variant: 'alert',
+            alert: {
+              color: 'success'
+            },
+            close: false
+          })
+        );
+      }
+    }
+  });
+  // 删除团队
+  const [openteam, setopenteam] = React.useState(false);
+  const [idteam, setidteam] = React.useState(false);
+  const deleteTeam = (id) => () => {
+    setopenteam(true);
+    setidteam(id);
+  };
+  const handleCloseteam = () => {
+    setopenteam(false);
+  };
+  const handleCloseteamdel = async () => {
+    const res = await dteam(idteam);
+    console.log('res', res);
+  };
+
+  // 团队表格
+  const columnTeam = [
+    {
+      title: 'id',
+      dataIndex: 'id',
+      key: 'id'
+    },
+    {
+      title: 'creatorId',
+      dataIndex: 'creatorId',
+      key: 'creatorId'
+    },
+    {
+      title: 'teamMemberId',
+      dataIndex: 'teamMemberId',
+      key: 'teamMemberId'
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Space>
+          <DeleteIcon onClick={deleteTeam(record.id)} />
+        </Space>
+      )
+    }
+  ];
 
   useEffect(() => {
     gteamfun();
@@ -67,12 +157,12 @@ const SettingPage = () => {
   const content = (
     <div>
       <p>
-        <Button type="text">Change Name</Button>
+        <AntButton type="text">Change Name</AntButton>
       </p>
       <p>
-        <Button danger type="text">
+        <AntButton danger type="text">
           Delete Social Group
-        </Button>
+        </AntButton>
       </p>
     </div>
   );
@@ -147,9 +237,9 @@ const SettingPage = () => {
                   Owner
                 </div>
               </div>
-              <Button icon={<PlusOutlined />} className="invite_add">
+              <AntButton icon={<PlusOutlined />} className="invite_add">
                 invite
-              </Button>
+              </AntButton>
             </div>
             <div className="team">
               <div className="team_title">Social Groups</div>
@@ -165,11 +255,11 @@ const SettingPage = () => {
                     <div className="logo">图标</div>
                   </div>
                   <div className="btn">
-                    <Button type="primary" icon={<UndoOutlined />} className="btn_link" onClick={handleClickOpen}>
+                    <AntButton type="primary" icon={<UndoOutlined />} className="btn_link" onClick={handleClickOpen}>
                       Link Socials
-                    </Button>
+                    </AntButton>
                     <Popover placement="rightTop" trigger="click" content={content}>
-                      <Button>...</Button>
+                      <AntButton>...</AntButton>
                     </Popover>
                   </div>
                   <div className="bottom_info">
@@ -186,9 +276,9 @@ const SettingPage = () => {
                 </div>
               ))}
               <div className={arr.length === 2 ? 'society_create2 society_create' : 'society_create1 society_create'}>
-                <Button icon={<PlusOutlined />} className="btn_create">
+                <AntButton icon={<PlusOutlined />} className="btn_create">
                   Create New social group
-                </Button>
+                </AntButton>
               </div>
             </div>
             <div className="play">
@@ -198,9 +288,9 @@ const SettingPage = () => {
                   <div className="logo" />
                   <div className="title_info">5th Jul at 3:20 PM.</div>
                 </div>
-                <Button type="text" className="btn_Upgrade">
+                <AntButton type="text" className="btn_Upgrade">
                   Upgrade my subscription
-                </Button>
+                </AntButton>
               </div>
             </div>
           </div>
@@ -221,36 +311,36 @@ const SettingPage = () => {
                   <div className="title">Full Name</div>
                   <div className="content">张琪</div>
                 </div>
-                <Button type="text">
+                <AntButton type="text">
                   <EditOutlined className="edit_icon" />
-                </Button>
+                </AntButton>
               </div>
               <div className="li">
                 <div className="lable">
                   <div className="title">Email Address</div>
                   <div className="content">17330136057@163.com</div>
                 </div>
-                <Button type="text">
+                <AntButton type="text">
                   <EditOutlined className="edit_icon" />
-                </Button>
+                </AntButton>
               </div>
               <div className="li">
                 <div className="lable">
                   <div className="title">Password</div>
                   <div className="content">**************</div>
                 </div>
-                <Button type="text">
+                <AntButton type="text">
                   <EditOutlined className="edit_icon" />
-                </Button>
+                </AntButton>
               </div>
               <div className="li">
                 <div className="lable">
                   <div className="title">Google Account</div>
                   <div className="content">Not linked</div>
                 </div>
-                <Button disabled loading>
+                <AntButton disabled loading>
                   Loading...
-                </Button>
+                </AntButton>
               </div>
               <div className="li">
                 <div className="lable">
@@ -281,21 +371,102 @@ const SettingPage = () => {
                 <div className="Your">Your Team</div>
                 <div className="pending">You, 0 team members, and 1 pending invite.</div>
               </div>
-              <Button icon={<PlusOutlined />} className="newMember" type="primary">
+              <AntButton icon={<PlusOutlined />} className="newMember" type="primary" onClick={handleClickOpentc}>
                 Invite new member
-              </Button>
+              </AntButton>
             </div>
             <div className="table">
-              <Table pagination={false} dataSource={dataSource} columns={columns} />;
+              <Table pagination={false} dataSource={teamList} columns={columnTeam} />;
             </div>
             <div className="bottom">
               <div className="problem">Experiencing issues related to your Workspace?</div>
               <div className="btn">
-                <Button className="btn_n">See FAQ Answers</Button>
-                <Button className="btn_n">contact Support</Button>
+                <AntButton className="btn_n">See FAQ Answers</AntButton>
+                <AntButton className="btn_n">contact Support</AntButton>
               </div>
             </div>
           </div>
+          {/* 删除团队 */}
+          <Dialog
+            open={openteam}
+            onClose={handleCloseteam}
+            maxWidth="xs"
+            fullWidth
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            {openteam && (
+              <>
+                <DialogTitle id="alert-dialog-title">删除</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    <Typography variant="body2" component="span">
+                      确定删除？
+                    </Typography>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions sx={{ pr: 2.5 }}>
+                  <AntButton sx={{ color: 'error.dark', borderColor: 'error.dark' }} onClick={handleCloseteam} color="secondary">
+                    取消
+                  </AntButton>
+                  <AntButton variant="contained" onClick={handleCloseteamdel} autoFocus>
+                    确定
+                  </AntButton>
+                </DialogActions>
+              </>
+            )}
+          </Dialog>
+          {/* 添加团队 */}
+          <Dialog open={opentc} onClose={handleClosetc} aria-labelledby="form-dialog-title">
+            {opentc && (
+              <>
+                <DialogTitle id="form-dialog-title">Invite team members</DialogTitle>
+                <DialogContent>
+                  <Stack spacing={3}>
+                    <DialogContentText>
+                      <Typography variant="body2" component="span">
+                        User(s) will have access to all Instagram accounts within your workspace.
+                      </Typography>
+                    </DialogContentText>
+                    {/* <TextField autoFocus size="small" id="name" label="kelly@monet.com" type="email" fullWidth /> */}
+                    <form onSubmit={formik.handleSubmit}>
+                      <Grid container spacing={gridSpacing}>
+                        <Grid item xs={12}>
+                          <TextField
+                            fullWidth
+                            id="emailInstant"
+                            name="emailInstant"
+                            label="kelly@monet.com"
+                            type="email"
+                            value={formik.values.emailInstant}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.emailInstant && Boolean(formik.errors.emailInstant)}
+                            helperText={formik.touched.emailInstant && formik.errors.emailInstant}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Stack direction="row" justifyContent="flex-end">
+                            <Button variant="contained" type="submit">
+                              Submit
+                            </Button>
+                          </Stack>
+                        </Grid>
+                      </Grid>
+                    </form>
+                  </Stack>
+                </DialogContent>
+                {/* <DialogActions sx={{ pr: 2.5 }}>
+                  <AntButton sx={{ color: 'error.dark' }} onClick={handleClosetc} color="secondary">
+                    Cancel
+                  </AntButton>
+                  <AntButton variant="contained" size="small" onClick={handleClosetc}>
+                    Send Invite(s)
+                  </AntButton>
+                </DialogActions> */}
+              </>
+            )}
+          </Dialog>
         </div>
       ),
       icon: <HomeOutlined />
@@ -316,18 +487,18 @@ const SettingPage = () => {
                 <div className="payment">
                   <div className="details">
                     <div className="d_title">Payment Details</div>
-                    <Button type="link" block className="edit">
+                    <AntButton type="link" block className="edit">
                       Edit
-                    </Button>
+                    </AntButton>
                   </div>
                   <div className="paypal">Paypal</div>
                 </div>
                 <div className="payment payment_b">
                   <div className="details">
                     <div className="d_title">Additional Billing Details</div>
-                    <Button type="link" block className="edit">
+                    <AntButton type="link" block className="edit">
                       Edit
-                    </Button>
+                    </AntButton>
                   </div>
                   <div className="paypal">Country - US</div>
                   <div className="paypal">VAT Number - Not Specified</div>
@@ -357,12 +528,12 @@ const SettingPage = () => {
               </div>
             </div>
             <div className="btn">
-              <Button className="btn_n">Cancel Subscription</Button>
+              <AntButton className="btn_n">Cancel Subscription</AntButton>
               <div className="btn_right">
-                <Button className="btn_n">Cancel Changes</Button>
-                <Button className="btn_n btn_config" type="primary">
+                <AntButton className="btn_n">Cancel Changes</AntButton>
+                <AntButton className="btn_n btn_config" type="primary">
                   Modify Subscription
-                </Button>
+                </AntButton>
               </div>
             </div>
           </div>
@@ -392,7 +563,7 @@ const SettingPage = () => {
   return (
     <div>
       <div>
-        <Tabs defaultActiveKey="2" items={items} />
+        <Tabs defaultActiveKey="1" items={items} />
         <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={openl}>
           <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
             Edit Socials for 张琪
@@ -434,7 +605,7 @@ const SettingPage = () => {
                       </Grid>
                       <Grid item>
                         {/* <Chip size="small" label="Pro" color="primary" /> */}
-                        <Button type="primary">connect</Button>
+                        <AntButton type="primary">connect</AntButton>
                       </Grid>
                     </Grid>
                   }
@@ -448,7 +619,7 @@ const SettingPage = () => {
                       <Typography variant="subtitle2">UI/UX Designer</Typography>
                     </Grid>
                     <Grid item>
-                      <Button type="primary">connect</Button>
+                      <AntButton type="primary">connect</AntButton>
                     </Grid>
                   </Grid>
                 </SubCard>
@@ -463,7 +634,7 @@ const SettingPage = () => {
                         <Typography variant="subtitle2">UI/UX Designer</Typography>
                       </Grid>
                       <Grid item>
-                        <Button type="primary">connect</Button>
+                        <AntButton type="primary">connect</AntButton>
                       </Grid>
                     </Grid>
                   }
@@ -477,7 +648,7 @@ const SettingPage = () => {
                       <Typography variant="subtitle2">UI/UX Designer</Typography>
                     </Grid>
                     <Grid item>
-                      <Button type="primary">connect</Button>
+                      <AntButton type="primary">connect</AntButton>
                     </Grid>
                   </Grid>
                 </SubCard>
