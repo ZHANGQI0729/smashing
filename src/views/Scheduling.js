@@ -67,6 +67,8 @@ import { dispatch, useSelector } from 'store';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Toolbar from 'components/application/calendar/Toolbar';
 import { getEvents, addEvent, updateEvent, removeEvent } from 'store/slices/calendar';
+import { createadd } from "api/Scheduling/index"
+import { openSnackbar, handlerIconVariants } from 'store/slices/snackbar';
 const { RangePicker } = DatePicker;
 // eslint-disable-next-line import/no-unresolved
 // import FullCalendar from '@fullcalendar/react';
@@ -575,6 +577,46 @@ const SchedulingPage = () => {
   const createpostOk = () => {
     setcreatepost(false)
   }
+  const [createsubmitdata, setcreatesubmitdata] = useState({ title: '', publishDate: '', content: '', mediaIds: ['3fa85f64-5717-4562-b3fc-2c963f66afa6'], socialGroupsId: '3fa85f64-5717-4562-b3fc-2c963f66afa6' })
+
+  // 点击了创建提交
+  const createsubmit =async (e) => {
+    console.log(e.title);
+    createsubmitdata.title = e.title
+    if (createsubmitdata.title=='') {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: <FormattedMessage id="Please enter title" />,
+          variant: "alert",
+          alert: {
+            color: "error"
+          },
+          iconVariant: 'error'
+          // close: false
+        })
+      )
+    } else if (createsubmitdata.publishDate == '') {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: <FormattedMessage id="Please select a time" />,
+          variant: "alert",
+          alert: {
+            color: "error"
+          },
+          iconVariant: 'error'
+          // close: false
+        })
+      )
+    } else {
+      let res=await createadd(createsubmitdata)
+      console.log('请求成功',res);
+      
+    }
+
+    console.log(createsubmitdata);
+  }
 
   useEffect(() => {
     dispatch(getEvents()).then(() => setLoading(false));
@@ -612,7 +654,7 @@ const SchedulingPage = () => {
     },
   };
   const onOk = (value) => {
-    console.log('onOk: ', value);
+    console.log('onOk: 点击了确定', value);
   };
 
   return (
@@ -1643,17 +1685,39 @@ const SchedulingPage = () => {
             <div className='box_right'>
               <div className='box_right_title'><i className='iconfont icon-tupian'></i> <FormattedMessage id="Your Post" /></div>
               <div className='box_right_context'>
-                <div className='box_right_text'><FormattedMessage id="Add Media" /></div>
-                <Upload {...props}>
-                  <Button icon={<UploadOutlined />}>Upload</Button>
-                </Upload>
-                <Input.TextArea rows={5} style={{ marginTop: '50px', marginBottom: '20px',height:'300px' }} />
-
+                <div className='box_right_text'><FormattedMessage id="Add Media" />
+                  <Upload {...props}>
+                    <Button icon={<UploadOutlined />} style={{ marginTop: '10px' }}>Upload</Button>
+                  </Upload></div>
               </div>
+              <Form
+                name="basic"
+                onFinish={createsubmit}
+                autoComplete="off"
+              >
+                <Form.Item
+                  label=""
+                  name="title"
+                >
+                  <Input.TextArea rows={5} style={{ marginTop: '10px', height: '300px' }} />
+                </Form.Item>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <DatePicker
+                    showTime
+                    onChange={(value, dateString) => {
+                      console.log('Selected Time: ', value);
+                      console.log('Formatted Selected Time: ', createsubmitdata.publishDate = dateString);
+                    }}
+                    onOk={onOk}
+                  />
+                  <Button type="primary" htmlType="submit">
+                    <FormattedMessage id="SchedulingBrandSave" />
+                  </Button>
+                </div>
+              </Form>
             </div>
           </div>
-          <DialogActions style={{ backgroundColor: '#fafafa',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
-            {/* <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}> */}
+          {/* <DialogActions style={{ backgroundColor: '#fafafa', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <DatePicker
               showTime
               onChange={(value, dateString) => {
@@ -1662,16 +1726,14 @@ const SchedulingPage = () => {
               }}
               onOk={onOk}
             />
-            <Button type="primary" onClick={createpostOk}>
+            <Button type="primary" onClick={createsubmit}>
               <FormattedMessage id="SchedulingBrandSave" />
             </Button>
-            {/* </div> */}
-            
-          </DialogActions>
+          </DialogActions> */}
         </BootstrapDialog>
-      </div>
+      </div >
       {/* 事件表 */}
-      <Toolbar
+      < Toolbar
         date={fullcalendardate}
         view={view}
         onClickNext={handleDateNext}
@@ -1680,7 +1742,7 @@ const SchedulingPage = () => {
         onChangeView={handleViewChange}
         style={{ marginTop: "10px" }}
       />
-      <SubCard style={{ marginTop: "0px" }}>
+      <SubCard SubCard style={{ marginTop: "0px" }}>
         <FullCalendar
           weekends
           editable
