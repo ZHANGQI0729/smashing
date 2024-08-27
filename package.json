@@ -13,6 +13,8 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
     "@babel/preset-react": "^7.23.3",
+    "@dcloudio/uni-cli-i18n": "^2.0.2-4020420240722003",
+    "@dcloudio/uni-cli-shared": "^2.0.2-4020420240722003",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
