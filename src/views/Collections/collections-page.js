@@ -30,8 +30,20 @@ import ContentCopy from '@mui/icons-material/ContentCopy';
 import ContentPaste from '@mui/icons-material/ContentPaste';
 import Cloud from '@mui/icons-material/Cloud';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import DialogContentText from '@mui/material/DialogContentText';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import EmojiPicker from 'components/ui-component/third-party/EmojiPicker';
+import { dispatch } from 'store';
+import { openSnackbar } from 'store/slices/snackbar';
+import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
+import Menu from '@mui/material/Menu';
 
 import '../../scss/collections.scss';
+import { gcollection, pcollection, dcollection } from '../../api/collection/index';
 
 const backImg = '/assets/images/reports/backImg.png';
 const Avatar3 = '/assets/images/users/avatar-3.png';
@@ -55,6 +67,88 @@ const CollectionsPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  // 请求new Collection
+  const [CollectionList, setCollectionList] = React.useState([]);
+  // 请求Collection
+  const gcollectionFun = async () => {
+    const res = await gcollection();
+    console.log('CollectionList', res);
+    if (res.status === 200) {
+      setCollectionList(res.data.items);
+    }
+  };
+  // 添加
+  const [openco, setOpenco] = React.useState(false);
+  const handleClickOpenco = () => {
+    setOpenco(true);
+  };
+  const handleCloseco = () => {
+    setOpenco(false);
+  };
+  const [message, setMessage] = React.useState('https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f604.png');
+  const validationSchema = yup.object({
+    Name: yup.string().required('Name is required')
+  });
+  const formik = useFormik({
+    initialValues: {
+      Name: ''
+    },
+    validationSchema,
+    onSubmit: async (value) => {
+      console.log('value', value, message);
+      const res = await pcollection({ Name: value.Name, iconUrl: message });
+      console.log('添加Collection', res);
+      if (res.status === 200) {
+        handleCloseco();
+        gcollectionFun();
+        formik.values.Name = '';
+        dispatch(
+          openSnackbar({
+            open: true,
+            message: '成功',
+            variant: 'alert',
+            alert: {
+              color: 'success'
+            },
+            close: false
+          })
+        );
+      }
+    }
+  });
+
+  // ...
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClickSort = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseSort = () => {
+    setAnchorEl(null);
+  };
+
+  // 删除
+  const handleDelete = async () => {
+    const res = await dcollection('3a1441dd-cdef-d853-042e-f0b0084f25fb');
+    console.log('删除', res);
+    if (res.status === 204) {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: '成功',
+          variant: 'alert',
+          alert: {
+            color: 'success'
+          },
+          close: false
+        })
+      );
+    }
+  };
+
+  React.useEffect(() => {
+    gcollectionFun();
+  }, []);
   return (
     <div className="boxs">
       <MainCard
@@ -93,6 +187,18 @@ const CollectionsPage = () => {
                   </Typography>
                 </MenuItem>
                 <Divider />
+                {CollectionList.map((item, index) => (
+                  <MenuItem>
+                    <ListItemIcon>
+                      {/* <ContentPaste fontSize="small" /> */}
+                      <Avatar alt="" sx={{ width: 20, height: 20 }} src={item.iconUrl} />
+                    </ListItemIcon>
+                    <ListItemText>{item.name}</ListItemText>
+                    <Typography variant="body2" color="text.secondary">
+                      0
+                    </Typography>
+                  </MenuItem>
+                ))}
                 <MenuItem>
                   <ListItemIcon>
                     <Cloud fontSize="small" />
@@ -101,11 +207,83 @@ const CollectionsPage = () => {
                 </MenuItem>
               </MenuList>
             </Paper>
-            <div className="newc">
+            <Button className="newc" onClick={handleClickOpenco}>
               <AddBoxIcon fontSize="small" />
               &nbsp; New Collection
-            </div>
+            </Button>
+            {/* 添加 */}
+            <Dialog open={openco} onClose={handleCloseco} aria-labelledby="form-dialog-title">
+              {openco && (
+                <>
+                  <DialogTitle id="form-dialog-title">Create a new collection</DialogTitle>
+                  <DialogContent>
+                    <Stack spacing={3}>
+                      <DialogContentText>
+                        <Typography variant="body2" component="span">
+                          Emoji &nbsp; Collection name
+                        </Typography>
+                      </DialogContentText>
+                      {/* <TextField autoFocus size="small" id="name" label="kelly@monet.com" type="email" fullWidth /> */}
+                      <form onSubmit={formik.handleSubmit}>
+                        <Grid container spacing={gridSpacing}>
+                          <Grid item xs={12} style={{ display: 'flex' }}>
+                            <InputAdornment position="start" style={{ marginTop: '25px' }}>
+                              <EmojiPicker value={message} setValue={setMessage} />
+                            </InputAdornment>
+                            <TextField
+                              fullWidth
+                              id="Name"
+                              name="Name"
+                              label="Name"
+                              value={formik.values.Name}
+                              onChange={formik.handleChange}
+                              onBlur={formik.handleBlur}
+                              error={formik.touched.Name && Boolean(formik.errors.Name)}
+                              helperText={formik.touched.Name && formik.errors.Name}
+                            />
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Stack direction="row" justifyContent="flex-end">
+                              <Button variant="contained" type="submit">
+                                Create
+                              </Button>
+                            </Stack>
+                          </Grid>
+                        </Grid>
+                      </form>
+                    </Stack>
+                  </DialogContent>
+                  {/* <DialogActions sx={{ pr: 2.5 }}>
+                  <AntButton sx={{ color: 'error.dark' }} onClick={handleClosetc} color="secondary">
+                    Cancel
+                  </AntButton>
+                  <AntButton variant="contained" size="small" onClick={handleClosetc}>
+                    Send Invite(s)
+                  </AntButton>
+                </DialogActions> */}
+                </>
+              )}
+            </Dialog>
           </div>
+          {/* all */}
+          <div>
+            <div className="headerTitle">
+              <div>555 收藏</div>
+              <div>
+                <IconButton onClick={handleClickSort} size="small" aria-label="more options">
+                  <MoreHorizTwoToneIcon fontSize="small" />
+                </IconButton>
+                <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleCloseSort}>
+                  <MenuItem onClick={handleCloseSort}>Export as CSV</MenuItem>
+                  <MenuItem onClick={handleCloseSort}>Date</MenuItem>
+                  <MenuItem onClick={handleCloseSort}>Add to favourites</MenuItem>
+                  <MenuItem onClick={handleDelete}>Delete collection</MenuItem>
+                </Menu>
+              </div>
+            </div>
+            <div>内容</div>
+          </div>
+          {/* smart */}
           <div className="tabcontent">
             <Image src={backImg} alt="Berry" width={700} height={260} style={{ maxWidth: '100%', height: 'auto' }} />
             <h1 className="title">Link Instagram account to view Analytics! 🔗</h1>
