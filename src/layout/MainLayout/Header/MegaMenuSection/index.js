@@ -267,5 +267,5 @@ const MegaMenuSection = () => {
     </>
   );
 };
-
+HeaderAvatar.displayName='HeaderAvatar'
 export default MegaMenuSection;

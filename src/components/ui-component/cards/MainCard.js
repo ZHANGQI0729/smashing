@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 // material-ui
 import Card from '@mui/material/Card';
@@ -21,7 +21,7 @@ const headerSX = {
 
 // ==============================|| CUSTOM MAIN CARD ||============================== //
 
-const MainCard = React.forwardRef(
+const MainCard = forwardRef(
   (
     {
       border = false,
@@ -85,5 +85,5 @@ MainCard.propTypes = {
   sx: PropTypes.object,
   title: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.object])
 };
-
+MainCard.displayName = 'MainCard'
 export default MainCard;

@@ -29,5 +29,5 @@ Page.propTypes = {
   meta: PropTypes.node,
   title: PropTypes.string
 };
-
+Page.displayName='Page'
 export default Page;

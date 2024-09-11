@@ -247,7 +247,7 @@ const SettingPage = () => {
             </div>
             <div className="society">
               {arr.map((item, index) => (
-                <div className="society_li">
+                <div className="society_li" key={index}>
                   <div className="society_top">
                     <div className="society_info">
                       <div className="title">张 琪s Social Group</div>0 of 4 socials connected

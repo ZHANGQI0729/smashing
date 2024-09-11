@@ -188,7 +188,7 @@ const CollectionsPage = () => {
                 </MenuItem>
                 <Divider />
                 {CollectionList.map((item, index) => (
-                  <MenuItem>
+                  <MenuItem key={index}>
                     <ListItemIcon>
                       {/* <ContentPaste fontSize="small" /> */}
                       <Avatar alt="" sx={{ width: 20, height: 20 }} src={item.iconUrl} />

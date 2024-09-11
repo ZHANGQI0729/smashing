@@ -232,7 +232,7 @@
     padding: 0 !important;
 }
 
-.Scheduling {
+.Ideas {
     min-width: 100%;
 
     :deep :where(.css-dev-only-do-not-override-f7vrd6).ant-drawer-right>.ant-drawer-content-wrapper {
@@ -243,15 +243,18 @@
     }
 
 
-    .Scheduling_top {
+    .Ideas_top {
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        .Scheduling_top_left {
-            .Scheduling_top_left_title {}
+        .Ideas_top_left {
+            .Ideas_top_left_title {
+                display: flex;
+                align-items: center;
+            }
 
-            .Scheduling_top_left_text {
+            .Ideas_top_left_text {
                 display: flex;
                 align-items: center;
 
@@ -268,7 +271,7 @@
             }
         }
 
-        .Scheduling_top_right {
+        .Ideas_top_right {
             font-size: 20px !important;
         }
     }

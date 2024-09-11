@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React,{forwardRef} from 'react';
 
 // material-ui
 import Collapse from '@mui/material/Collapse';
@@ -11,7 +11,7 @@ import Grow from '@mui/material/Grow';
 
 // ==============================|| TRANSITIONS ||============================== //
 
-const Transitions = React.forwardRef(({ children, position = 'top-left', type = 'grow', direction = 'up', ...others }, ref) => {
+const Transitions = forwardRef(({ children, position = 'top-left', type = 'grow', direction = 'up', ...others }, ref) => {
   let positionSX = {
     transformOrigin: '0 0 0'
   };
@@ -102,5 +102,5 @@ Transitions.propTypes = {
   position: PropTypes.oneOf(['top-left', 'top-right', 'top', 'bottom-left', 'bottom-right', 'bottom']),
   direction: PropTypes.oneOf(['up', 'down', 'left', 'right'])
 };
-
+Transitions.displayName='Transitions'
 export default Transitions;

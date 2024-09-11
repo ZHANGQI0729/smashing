@@ -1,40 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 module.exports = {
-  // todo: this need to set to true or remove it as default is true. set false as chart was giving error when first render
-  // https://github.com/apexcharts/apexcharts.js/issues/3652
-  // async headers() {
-  //   return [
-  //     {
-  //       // Apply these headers to all routes in your application.
-  //       source: '/:path*',
-  //       headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }]
-  //     }
-  //   ];
-  // },
-
-  // async headers() {
-  //   return [
-  //     {
-  //       source: '/api/v1/:slug',
-  //       headers: [
-  //         {
-  //           key: 'Access-Control-Allow-Origin',
-  //           value: 'https://auth.smashing.one/' // 设置你的来源
-  //           // value: 'https://api.smashing.one/' // 设置你的来源
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Methods',
-  //           value: 'GET, POST, PUT, DELETE, OPTIONS'
-  //         },
-  //         {
-  //           key: 'Access-Control-Allow-Headers',
-  //           value: 'Content-Type, Authorization'
-  //         }
-  //       ]
-  //     }
-  //   ];
-  // },
   async rewrites() {
     return [
       {
@@ -47,6 +13,10 @@ module.exports = {
       }
     ];
   },
+  output: 'export',
+  images: {
+    unoptimized: true
+  },
   reactStrictMode: false,
   modularizeImports: {
     '@mui/material': {
@@ -58,9 +28,6 @@ module.exports = {
     '@mui/icons-material': {
       transform: '@mui/icons-material/{{member}}'
     }
-  },
-  images: {
-    domains: ['flagcdn.com']
   },
   env: {
     REACT_APP_VERSION: process.env.REACT_APP_VERSION,

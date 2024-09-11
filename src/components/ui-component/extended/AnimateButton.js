@@ -1,14 +1,14 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React,{forwardRef} from 'react';
 
 // third-party
 import { motion, useCycle } from 'framer-motion';
 
 // ==============================|| ANIMATION BUTTON ||============================== //
 
-const AnimateButton = React.forwardRef(
+const AnimateButton = forwardRef(
   (
     {
       children,
@@ -95,5 +95,5 @@ AnimateButton.propTypes = {
   direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
   scale: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
 };
-
+AnimateButton.displayName='AnimateButton'
 export default AnimateButton;

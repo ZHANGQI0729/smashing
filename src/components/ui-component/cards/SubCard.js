@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React,{forwardRef} from 'react';
 
 // material-ui
 import Card from '@mui/material/Card';
@@ -14,7 +14,7 @@ import { ThemeMode } from 'config';
 
 // ==============================|| CUSTOM SUB CARD ||============================== //
 
-const SubCard = React.forwardRef(
+const SubCard = forwardRef(
   ({ children, content = true, contentClass, darkTitle, secondary, sx = {}, contentSX = {}, title, ...others }, ref) => {
     const { mode } = useConfig();
     const defaultShadow = mode === ThemeMode.DARK ? '0 2px 14px 0 rgb(33 150 243 / 10%)' : '0 2px 14px 0 rgb(32 40 45 / 8%)';
@@ -49,5 +49,5 @@ SubCard.propTypes = {
   contentSX: PropTypes.object,
   title: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.object])
 };
-
+SubCard.displayName='SubCard'
 export default SubCard;

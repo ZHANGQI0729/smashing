@@ -176,5 +176,5 @@ const SearchSection = () => {
     </>
   );
 };
-
+HeaderAvatar.displayName='HeaderAvatar'
 export default SearchSection;
